@@ -48,11 +48,8 @@ fun MessageListScreen(
             TopAppBar(
                 title = { Text(viewModel.targetCall) },
                 navigationIcon = {
-                    androidx.compose.material3.IconButton(onClick = onBack) {
-                        androidx.compose.material3.Icon(
-                            androidx.compose.material.icons.Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                        )
+                    androidx.compose.material3.TextButton(onClick = onBack) {
+                        Text("‹ Back")
                     }
                 },
             )
