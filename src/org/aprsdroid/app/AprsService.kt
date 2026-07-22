@@ -52,6 +52,10 @@ class AprsService : Service() {
     lateinit var db: AprsDatabase
 
     var poster: AprsBackendInterface? = null
+    var locSource: LocationSource? = null
+    var msgService: MessageService? = null
+    var igateService: IgateService? = null
+    var digipeaterService: DigipeaterService? = null
     var singleShot = false
 
     // ---- lifecycle ----
@@ -76,6 +80,9 @@ class AprsService : Service() {
         running = false
         linkError = 0
         poster?.stop()
+        locSource?.stop()
+        msgService?.stop()
+        igateService?.stop()
         serviceScope.cancel()
         ServiceNotifier.instance.stop(this)
         super.onDestroy()
@@ -136,8 +143,12 @@ class AprsService : Service() {
         if (!running) {
             running = true
             startPoster()
-            // Register for outgoing message notifications — msgNotifier will
-            // be wired in Batch 6 when MessageService is ported.
+            // Create the message service for incoming/outgoing APRS messages
+            msgService = MessageService(this)
+            // Create the digipeater service (only active over KISS/AFSK backends)
+            digipeaterService = DigipeaterService(prefs, TAG) { packet ->
+                sendDigipeatedPacket(packet)
+            }
         } else {
             onPosterStarted()
         }
@@ -146,21 +157,33 @@ class AprsService : Service() {
     private fun startPoster() {
         poster?.stop()
         poster = AprsBackend.instanciateUploader(this, prefs)
+        // (Re)create the location source so changes to the loc_source
+        // preference take effect on each service start.
+        locSource?.stop()
+        locSource = LocationSources.instanciateLocation(this, prefs)
         val p = poster ?: return
         if (p.start()) {
             onPosterStarted()
         }
-        // IgateService startup will be wired in Batch 6.
+        // Start the IgateService if igating is enabled
+        if (prefs.isIgateEnabled()) {
+            igateService?.stop()
+            igateService = IgateService(this, prefs)
+            igateService?.start()
+        }
     }
 
     fun onPosterStarted() {
         Log.d(TAG, "onPosterStarted")
-        // Location source start will be wired in Batch 5.
+        // (Re)start location source, get location source name.
+        val locInfo = locSource?.start(singleShot) ?: getString(R.string.p_source_periodic)
+
         val callssid = prefs.getCallSsid()
-        val message = "$callssid: ${getString(R.string.p_source_periodic)}"
+        val message = "$callssid: $locInfo"
         ServiceNotifier.instance.start(this, message)
 
-        // msgService.sendPendingMessages() — wired in Batch 6.
+        // Kick off the outgoing message retry loop
+        msgService?.sendPendingMessages()
 
         sendBroadcast(
             Intent(SERVICE_STARTED)
@@ -407,7 +430,7 @@ class AprsService : Service() {
                 is PositionPacket -> addPosition(ts, fap, info, info.position, null)
                 is ObjectPacket -> addPosition(ts, fap, info, info.position, info.objectName)
                 is MessagePacket -> {
-                    // msgService.handleMessage(ts, fap, msg, digiPathCheck) — Batch 6
+                    msgService?.handleMessage(ts, fap, info, digiPathCheck)
                     Log.d(TAG, "received message from ${fap.sourceCall}: ${info.messageBody}")
                 }
                 else -> Log.d(TAG, "parsePacket: unhandled info type: ${info.javaClass}")
@@ -499,7 +522,7 @@ class AprsService : Service() {
         handler.post {
             addPost(type, statusId, message)
             if (type == PostEntity.TYPE_INCMG) {
-                // msgService.sendPendingMessages() — Batch 6
+                msgService?.sendPendingMessages()
             } else if (type == PostEntity.TYPE_ERROR) {
                 stopSelf()
             }
@@ -509,8 +532,8 @@ class AprsService : Service() {
     fun postSubmit(post: String) {
         Log.d(TAG, "Incoming post: $post")
         postAddPost(PostEntity.TYPE_INCMG, R.string.post_incmg, post)
-        // digipeaterService.processIncomingPost(post) — Batch 6
-        // igateService.handlePostSubmitData(post) — Batch 6
+        digipeaterService?.processIncomingPost(post)
+        igateService?.handlePostSubmitData(post)
     }
 
     fun postAbort(post: String) {

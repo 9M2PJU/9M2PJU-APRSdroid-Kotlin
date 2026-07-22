@@ -24,6 +24,13 @@ interface MessageDao {
     suspend fun updateMessageType(id: Long, type: Int)
 
     /**
+     * Update retry count and timestamp for an outgoing message
+     * (matches Scala `updateMessage(id, cv)` with RETRYCNT + TS).
+     */
+    @Query("UPDATE messages SET retrycnt = :retrycnt, ts = :ts WHERE _id = :id")
+    suspend fun updateMessageRetry(id: Long, retrycnt: Int, ts: Long)
+
+    /**
      * Mark all OUT_NEW messages to [call] with the given [msgid] as
      * [type] (typically OUT_ACKED or OUT_REJECTED).
      * Matches Scala `updateMessageAcked`.
