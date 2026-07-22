@@ -19,6 +19,18 @@ interface PositionDao {
     suspend fun insert(position: PositionEntity): Long
 
     /**
+     * Insert a position from raw fields (matches Scala `addPosition`
+     * position-table insert).
+     */
+    @Query(
+        """
+        INSERT INTO positions (ts, call, lat, lon)
+        VALUES (:ts, :call, :lat, :lon)
+        """
+    )
+    suspend fun addPosition(ts: Long, call: String, lat: Int, lon: Int): Long
+
+    /**
      * All positions newer than [sinceTs], ordered by call then _id
      * (matches Scala `getAllStaPositions`).
      */

@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicReference
         MessageEntity::class,
     ],
     version = 5,
-    exportSchema = true,
+    exportSchema = false,
 )
 abstract class AprsDatabase : RoomDatabase() {
 
@@ -70,7 +70,6 @@ abstract class AprsDatabase : RoomDatabase() {
                 DB_NAME,
             )
                 .addMigrations(MIGRATION_4_5)
-                .fallbackToDestructiveMigrationOnDowngrade(false)
                 .build()
         }
 
