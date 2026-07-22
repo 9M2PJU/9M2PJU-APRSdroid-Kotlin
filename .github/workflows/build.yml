@@ -50,7 +50,7 @@ jobs:
 
       - name: Write local.properties
         run: |
-          # mapsApiKey is optional; falls back to upstream's restricted key
+          # mapsApiKey is optional; falls back to a placeholder if unset
           if [ -n "${{ secrets.MAPS_API_KEY }}" ]; then
             echo "mapsApiKey=${{ secrets.MAPS_API_KEY }}" >> local.properties
           fi

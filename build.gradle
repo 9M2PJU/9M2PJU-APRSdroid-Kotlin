@@ -54,7 +54,7 @@ def mapsApiKey() {
     try {
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
     } catch(Exception ex) {}
-    properties.getProperty('mapsApiKey', "AIzaSyA12R_iI_upYQ33FWnPU_8GlMKrEmjDxiQ")
+    properties.getProperty('mapsApiKey', "YOUR_API_KEY_HERE")
 }
 
 android {
