@@ -22,7 +22,7 @@ import org.aprsdroid.app.data.MessageEntity
  */
 class MessageListViewModel(
     app: Application,
-    private val targetCall: String,
+    val targetCall: String,
 ) : AndroidViewModel(app) {
 
     private val db = AprsDatabase.get(app)
@@ -43,13 +43,11 @@ class MessageListViewModel(
     val colors: IntArray = intArrayOf(0, 0xff8080b0.toInt(), 0xff80a080.toInt(),
         0xff30b030.toInt(), 0xffb03030.toInt(), 0xffa08080.toInt())
 
-    companion object {
-        class Factory(private val app: Application, private val targetCall: String) :
-            ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return MessageListViewModel(app, targetCall) as T
-            }
+    class Factory(private val app: Application, private val targetCall: String) :
+        ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return MessageListViewModel(app, targetCall) as T
         }
     }
 }

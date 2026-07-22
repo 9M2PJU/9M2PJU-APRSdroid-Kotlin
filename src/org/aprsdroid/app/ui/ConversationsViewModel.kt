@@ -42,12 +42,10 @@ class ConversationsViewModel(app: Application) : AndroidViewModel(app) {
     val colors: IntArray = intArrayOf(0, 0xff8080b0.toInt(), 0xff80a080.toInt(),
         0xff30b030.toInt(), 0xffb03030.toInt())
 
-    companion object {
-        class Factory(private val app: Application) : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return ConversationsViewModel(app) as T
-            }
+    class Factory(private val app: Application) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return ConversationsViewModel(app) as T
         }
     }
 }

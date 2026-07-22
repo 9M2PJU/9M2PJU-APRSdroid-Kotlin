@@ -41,12 +41,10 @@ class PostListViewModel(app: Application) : AndroidViewModel(app) {
         0xffe3d61c.toInt(),  // TYPE_IG
     )
 
-    companion object {
-        class Factory(private val app: Application) : ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return PostListViewModel(app) as T
-            }
+    class Factory(private val app: Application) : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return PostListViewModel(app) as T
         }
     }
 }
