@@ -14,6 +14,7 @@ import com.nogy.afu.soundmodem.Afsk
 import net.ab0oo.aprs.parser.APRSPacket
 import net.ab0oo.aprs.parser.Digipeater
 import net.ab0oo.aprs.parser.Parser
+import org.aprsdroid.app.data.PostEntity
 import sivantoledo.ax25.PacketHandler
 
 /**

@@ -15,8 +15,8 @@ import sivantoledo.ax25.Afsk1200Demodulator
  */
 class AfskDemodulator(
     private val au: AfskUploader,
-    inType: Int,
-    samplerate: Int,
+    private val inType: Int,
+    private val samplerate: Int,
 ) : Thread("AFSK demodulator") {
 
     private val bufSize = 8192
