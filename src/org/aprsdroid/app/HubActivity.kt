@@ -3,30 +3,30 @@ package org.aprsdroid.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.activity.viewModels
+import org.aprsdroid.app.ui.StationListScreen
+import org.aprsdroid.app.ui.StationListViewModel
 import org.aprsdroid.app.ui.theme.AprsTheme
 
+/**
+ * Kotlin/Compose implementation of `HubActivity`.
+ *
+ * Shows the list of stations sorted by distance. Uses
+ * [StationListViewModel] backed by Room to reactively display
+ * stations as they are heard.
+ */
 class HubActivity : ComponentActivity() {
+
+    private val viewModel: StationListViewModel by viewModels {
+        StationListViewModel.Factory(application, PrefsWrapper(this).getCallSsid())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UIHelper.applySystemBarInsets(this)
         setContent {
             AprsTheme {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Text(
-                        text = getString(R.string.app_hub),
-                        style = MaterialTheme.typography.headlineMedium,
-                    )
-                }
+                StationListScreen(viewModel)
             }
         }
     }
