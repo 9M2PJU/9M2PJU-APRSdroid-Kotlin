@@ -1,16 +1,29 @@
 package org.aprsdroid.app
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.text.InputType
 import android.util.Log
-import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.unit.dp
 import org.aprsdroid.app.data.AprsDatabase
 import org.aprsdroid.app.data.PostEntity
 import java.io.File
@@ -20,47 +33,69 @@ import java.security.cert.X509Certificate
 import kotlinx.coroutines.runBlocking
 
 /**
- * Kotlin port of the Scala `KeyfileImportActivity`.
+ * Kotlin/Compose port of the Scala `KeyfileImportActivity`.
  *
  * Imports a PKCS12 key file (.p12) for SSL authentication. Prompts
- * for the key password, extracts the callsign from the certificate's
- * X500Principal, saves the key to the app's private keystore directory,
- * and sets the callsign in preferences.
+ * for the key password via a Compose AlertDialog, extracts the
+ * callsign from the certificate's X500Principal, saves the key to
+ * the app's private keystore directory, and sets the callsign in
+ * preferences.
  */
-class KeyfileImportActivity : AppCompatActivity() {
+class KeyfileImportActivity : ComponentActivity() {
 
     private val tag = "APRSdroid.KeyImport"
     private val keystorePass = "APRS".toCharArray()
     private val keystoreDir = "keystore"
-
     private val callRegex = Regex(".*CALLSIGN=([0-9A-Za-z]+).*")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UIHelper.applySystemBarInsets(this)
         Log.d(tag, "created: $intent")
-        queryForPassword()
+
+        setContent {
+            PasswordDialog(
+                onConfirm = { pwd -> importKey(pwd) },
+                onCancel = { finish() },
+            )
+        }
     }
 
-    private fun queryForPassword() {
-        val pwd = EditText(this).apply {
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-        }
-        val listener = DialogInterface.OnClickListener { _, which ->
-            when (which) {
-                DialogInterface.BUTTON_POSITIVE -> importKey(pwd.text.toString())
-                else -> finish()
-            }
-        }
-        AlertDialog.Builder(this)
-            .setTitle(R.string.ssl_import_activity)
-            .setMessage(R.string.ssl_import_password)
-            .setView(pwd)
-            .setPositiveButton(android.R.string.ok, listener)
-            .setNegativeButton(android.R.string.cancel, listener)
-            .setOnCancelListener { finish() }
-            .create()
-            .show()
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    private fun PasswordDialog(
+        onConfirm: (String) -> Unit,
+        onCancel: () -> Unit,
+    ) {
+        var password by remember { mutableStateOf("") }
+        AlertDialog(
+            onDismissRequest = onCancel,
+            title = { Text(getString(R.string.ssl_import_activity)) },
+            text = {
+                Column {
+                    Text(getString(R.string.ssl_import_password))
+                    OutlinedTextField(
+                        value = password,
+                        onValueChange = { password = it },
+                        singleLine = true,
+                        visualTransformation = PasswordVisualTransformation(),
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                            .fillMaxWidth(),
+                    )
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { onConfirm(password) }) {
+                    Text(getString(android.R.string.ok))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = onCancel) {
+                    Text(getString(android.R.string.cancel))
+                }
+            },
+        )
     }
 
     private fun importKey(password: String) {
@@ -74,7 +109,6 @@ class KeyfileImportActivity : AppCompatActivity() {
                 val alias = aliases.nextElement()
                 if (ks.isKeyEntry(alias)) {
                     val c = ks.getCertificate(alias) as X509Certificate
-                    // work around missing X500Principal.getName(String, Map) on SDK<9:
                     val dn = c.subjectX500Principal.toString()
                         .replace("OID.1.3.6.1.4.1.12348.1.1=", "CALLSIGN=")
                     Log.d(tag, "Loaded key: $dn")
@@ -106,7 +140,7 @@ class KeyfileImportActivity : AppCompatActivity() {
                 startActivity(Intent(this, LogActivity::class.java))
             }
         } catch (e: Exception) {
-            val errmsg = getString(R.string.ssl_import_error, e.message)
+            val errmsg = getString(R.string.ssl_import_error, e.message ?: "")
             Toast.makeText(this, errmsg, Toast.LENGTH_LONG).show()
             Thread {
                 runBlocking {

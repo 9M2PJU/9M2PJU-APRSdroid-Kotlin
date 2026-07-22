@@ -27,7 +27,7 @@ import kotlinx.coroutines.withContext
  * deprecated.
  */
 class LocationReceiver2<Result>(
-    private val bgTask: (Intent) -> Result,
+    private val bgTask: (Intent?) -> Result,
     private val finishTask: (Result) -> Unit,
     private val cancelTask: (Result) -> Unit,
 ) : BroadcastReceiver() {
@@ -37,7 +37,7 @@ class LocationReceiver2<Result>(
     private val scope: CoroutineScope = MainScope()
     private var currentJob: Job? = null
 
-    fun startTask(i: Intent) {
+    fun startTask(i: Intent?) {
         pending += 1
         lastIntent = i
         if (pending == 1) {
@@ -45,7 +45,7 @@ class LocationReceiver2<Result>(
         }
     }
 
-    private fun runTask(i: Intent) {
+    private fun runTask(i: Intent?) {
         currentJob = scope.launch {
             val result = withContext(Dispatchers.IO) {
                 bgTask(i)

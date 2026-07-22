@@ -100,9 +100,6 @@ object UIHelper {
 
             v.setPadding(leftPad, topPad, rightPad, 0)
 
-            val bottomNav = act.findViewById<View>(R.id.bottom_nav)
-            bottomNav?.setPadding(0, 0, 0, bottomPad)
-
             insets
         }
     }

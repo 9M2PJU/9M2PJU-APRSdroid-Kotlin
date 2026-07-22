@@ -37,15 +37,6 @@ object LocationSources {
         }
 
     @JvmStatic
-    fun instanciatePrefsAct(prefs: PrefsWrapper): Int =
-        when (prefs.getString("loc_source", DEFAULT_CONNTYPE)) {
-            "smartbeaconing" -> R.xml.location_smartbeaconing
-            "periodic" -> R.xml.location_periodic
-            "manual" -> R.xml.location_manual
-            else -> R.xml.location_smartbeaconing
-        }
-
-    @JvmStatic
     fun getPermissions(prefs: PrefsWrapper): Set<String> =
         when (prefs.getString("loc_source", DEFAULT_CONNTYPE)) {
             "smartbeaconing", "periodic" -> setOf(

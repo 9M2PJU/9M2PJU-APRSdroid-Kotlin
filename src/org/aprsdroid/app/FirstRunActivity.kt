@@ -27,6 +27,11 @@ class FirstRunActivity : ComponentActivity() {
                         style = MaterialTheme.typography.headlineMedium,
                     )
                 }
+                PasscodeDialogCompose(
+                    activity = this,
+                    firstrun = true,
+                    onDismiss = {},
+                )
             }
         }
     }

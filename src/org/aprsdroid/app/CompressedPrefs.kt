@@ -1,68 +1,58 @@
 package org.aprsdroid.app
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.CheckBoxPreference
-import android.preference.ListPreference
-import android.preference.PreferenceActivity
-import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import org.aprsdroid.app.ui.PrefItem
+import org.aprsdroid.app.ui.PreferenceScreen
+import org.aprsdroid.app.ui.stringArray
 
 /**
- * Kotlin port of the Scala `CompressedPrefs`.
+ * Kotlin/Compose port of `CompressedPrefs`.
  *
- * Uses the XML preference framework (res/xml/compressed.xml). Mutually
- * disables "compressed_location" and "compressed_mice" checkboxes,
- * and disables "p__location_mice_status" when "compressed_location"
- * is checked.
+ * Compressed position preferences with mutually exclusive checkboxes
+ * for "compressed_location" and "compressed_mice", and a list for
+ * MICE status.
  */
-class CompressedPrefs : PreferenceActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
-
-    private val prefs by lazy { PrefsWrapper(this) }
-
-    private fun loadXml() {
-        addPreferencesFromResource(R.xml.compressed)
-    }
+class CompressedPrefs : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UIHelper.applySystemBarInsets(this)
-        loadXml()
-        preferenceScreen.sharedPreferences
-            .registerOnSharedPreferenceChangeListener(this)
-        updateCheckBoxState()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        preferenceScreen.sharedPreferences
-            .unregisterOnSharedPreferenceChangeListener(this)
-    }
-
-    override fun onSharedPreferenceChanged(sp: SharedPreferences?, key: String?) {
-        when (key) {
-            "compressed_location", "compressed_mice" -> updateCheckBoxState()
-            "p__location_mice_status" -> updateStatus()
+        setContent {
+            PreferenceScreen(
+                title = getString(R.string.p__location_compressed_settings),
+                onBack = { finish() },
+                items = compressedPrefItems(),
+            )
         }
     }
 
-    private fun updateCheckBoxState() {
-        val compressedLocationPref = findPreference("compressed_location") as? CheckBoxPreference ?: return
-        val compressedMicePref = findPreference("compressed_mice") as? CheckBoxPreference ?: return
-        val locationMiceStatusPref = findPreference("p__location_mice_status") as? ListPreference ?: return
-
-        if (compressedLocationPref.isChecked) {
-            locationMiceStatusPref.isEnabled = false
-            compressedMicePref.isEnabled = false
-        } else {
-            locationMiceStatusPref.isEnabled = true
-            compressedMicePref.isEnabled = true
-        }
-
-        compressedLocationPref.isEnabled = !compressedMicePref.isChecked
-    }
-
-    private fun updateStatus() {
-        val statusPref = findPreference("p__location_mice_status") as? ListPreference ?: return
-        Log.d("CompressedPrefs", "Selected Location Mice Status: ${statusPref.value}")
+    private fun compressedPrefItems(): List<PrefItem> {
+        val miceStatuses = stringArray(R.array.compressed_mice_status)
+        return listOf(
+            PrefItem.Switch(
+                key = "compressed_location",
+                title = getString(R.string.p__location_compressed_beacons),
+                summaryOn = getString(R.string.p__location_compressed_beacons_on),
+                summaryOff = getString(R.string.p__location_compressed_beacons_off),
+                default = false,
+            ),
+            PrefItem.Switch(
+                key = "compressed_mice",
+                title = getString(R.string.p__location_mice_beacons),
+                summaryOn = getString(R.string.p__location_mice_beacons_on),
+                summaryOff = getString(R.string.p__location_mice_beacons_off),
+                default = false,
+            ),
+            PrefItem.List(
+                key = "p__location_mice_status",
+                title = getString(R.string.p__location_mice_status),
+                entries = miceStatuses,
+                entryValues = miceStatuses,
+                default = "Off Duty",
+                dialogTitle = getString(R.string.p__location_mice_status),
+            ),
+        )
     }
 }

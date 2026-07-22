@@ -32,7 +32,6 @@ object AprsBackend {
 
     class BackendInfo(
         val create: (AprsService, PrefsWrapper) -> AprsBackendInterface,
-        val prefxml: Int,
         val permissions: Set<String>,
         val duplex: Int,
         val needPasscode: Int,
@@ -40,7 +39,6 @@ object AprsBackend {
 
     class ProtoInfo(
         val create: (AprsService, InputStream, OutputStream) -> TncProto,
-        val prefxml: Int,
         val link: String,
     )
 
@@ -67,63 +65,54 @@ object AprsBackend {
     val backendCollection = linkedMapOf(
         "udp" to BackendInfo(
             { _, p -> UdpUploader(p) },
-            R.xml.backend_udp,
             emptySet(),
             CAN_XMIT,
             PASSCODE_REQUIRED,
         ),
         "http" to BackendInfo(
             { _, p -> HttpPostUploader(p) },
-            R.xml.backend_http,
             emptySet(),
             CAN_XMIT,
             PASSCODE_REQUIRED,
         ),
         "vox" to BackendInfo(
             { s, p -> AfskUploader(s, p) },
-            0,
             setOf(Manifest.permission.RECORD_AUDIO),
             CAN_DUPLEX,
             PASSCODE_NONE,
         ),
         "tcp" to BackendInfo(
             { s, p -> TcpUploader(s, p) },
-            R.xml.backend_tcp,
             emptySet(),
             CAN_DUPLEX,
             PASSCODE_OPTIONAL,
         ),
         "bluetooth" to BackendInfo(
             { s, p -> BluetoothTnc(s, p) },
-            R.xml.backend_bluetooth,
             setOf(BLUETOOTH_PERMISSION),
             CAN_DUPLEX,
             PASSCODE_NONE,
         ),
         "ble" to BackendInfo(
             { s, p -> BluetoothLETnc(s, p) },
-            R.xml.backend_ble,
             setOf(BLUETOOTH_PERMISSION),
             CAN_DUPLEX,
             PASSCODE_NONE,
         ),
         "tcpip" to BackendInfo(
             { s, p -> TcpUploader(s, p) },
-            R.xml.backend_tcptnc,
             emptySet(),
             CAN_DUPLEX,
             PASSCODE_NONE,
         ),
         "usb" to BackendInfo(
             { s, p -> UsbTnc(s, p) },
-            R.xml.backend_usb,
             emptySet(),
             CAN_DUPLEX,
             PASSCODE_NONE,
         ),
         "digirig" to BackendInfo(
             { s, p -> DigiRig(s, p) },
-            R.xml.backend_digirig,
             setOf(Manifest.permission.RECORD_AUDIO),
             CAN_DUPLEX,
             PASSCODE_NONE,
@@ -133,23 +122,23 @@ object AprsBackend {
     val protoCollection = linkedMapOf(
         "aprsis" to ProtoInfo(
             { s, i, o -> AprsIsProto(s, i, o) },
-            R.xml.proto_aprsis, "aprsis",
+            "aprsis",
         ),
         "afsk" to ProtoInfo(
             { s, i, o -> AfskProto(s, i, o) },
-            R.xml.proto_afsk, "afsk",
+            "afsk",
         ),
         "kiss" to ProtoInfo(
             { s, i, o -> KissProto(s, i, o) },
-            R.xml.proto_kiss, "link",
+            "link",
         ),
         "tnc2" to ProtoInfo(
             { _, i, o -> Tnc2Proto(i, o) },
-            R.xml.proto_tnc2, "link",
+            "link",
         ),
         "kenwood" to ProtoInfo(
             { s, i, o -> KenwoodProto(s, i, o) },
-            R.xml.proto_kenwood, "link",
+            "link",
         ),
     )
 
@@ -193,10 +182,4 @@ object AprsBackend {
     @JvmStatic
     fun instanciateProto(service: AprsService, inputStream: InputStream, outputStream: OutputStream): TncProto =
         defaultProtoInfo(service.prefs).create(service, inputStream, outputStream)
-
-    @JvmStatic
-    fun prefxmlProto(prefs: PrefsWrapper): Int = defaultProtoInfo(prefs).prefxml
-
-    @JvmStatic
-    fun prefxmlBackend(prefs: PrefsWrapper): Int = defaultBackendInfo(prefs).prefxml
 }

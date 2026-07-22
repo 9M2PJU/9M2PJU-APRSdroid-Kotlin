@@ -1,45 +1,75 @@
 package org.aprsdroid.app
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import org.aprsdroid.app.ui.PrefItem
+import org.aprsdroid.app.ui.PreferenceScreen
 
 /**
- * Kotlin port of the Scala `MessagingPrefs`.
+ * Kotlin/Compose port of `MessagingPrefs`.
  *
- * Uses the XML preference framework (res/xml/messaging.xml). Reloads
- * the preference screen when relevant keys change so that dependent
- * preferences are shown/hidden correctly.
+ * Messaging preferences screen built with Jetpack Compose, replacing
+ * the old PreferenceActivity + XML framework.
  */
-class MessagingPrefs : PreferenceActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
-
-    private val prefs by lazy { PrefsWrapper(this) }
-
-    private fun loadXml() {
-        addPreferencesFromResource(R.xml.messaging)
-    }
+class MessagingPrefs : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UIHelper.applySystemBarInsets(this)
-        loadXml()
-        preferenceScreen.sharedPreferences
-            .registerOnSharedPreferenceChangeListener(this)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        preferenceScreen.sharedPreferences
-            .unregisterOnSharedPreferenceChangeListener(this)
-    }
-
-    override fun onSharedPreferenceChanged(sp: SharedPreferences?, key: String?) {
-        when (key) {
-            "p.messaging", "p.retry", "p.ackdupetoggle", "p.ackdupe",
-            "p.msgdupetoggle", "p.msgdupetime" -> {
-                preferenceScreen = null
-                loadXml()
-            }
+        setContent {
+            PreferenceScreen(
+                title = getString(R.string.p__messaging),
+                onBack = { finish() },
+                items = messagingPrefItems(),
+            )
         }
     }
+
+    private fun messagingPrefItems(): List<PrefItem> = listOf(
+        PrefItem.EditText(
+            key = "p.messaging",
+            title = getString(R.string.p_message_retry),
+            summary = getString(R.string.p_message_retry_summary),
+            dialogTitle = getString(R.string.p_message_retry_entry),
+            default = "7",
+            isNumeric = true,
+        ),
+        PrefItem.EditText(
+            key = "p.retry",
+            title = getString(R.string.p_retry_interval),
+            summary = getString(R.string.p_retry_interval_summary),
+            dialogTitle = getString(R.string.p_retry_interval_entry),
+            default = "30",
+            isNumeric = true,
+        ),
+        PrefItem.Switch(
+            key = "p.ackdupetoggle",
+            title = getString(R.string.p_ackdupetoggle),
+            summary = getString(R.string.p_ackdupetoggle_summary),
+        ),
+        PrefItem.EditText(
+            key = "p.ackdupe",
+            title = getString(R.string.p_ackdupe_interval),
+            summary = getString(R.string.p_ackdupe_interval_summary),
+            dialogTitle = getString(R.string.p_ackdupe_interval_entry),
+            default = "30",
+            isNumeric = true,
+            dependency = "p.ackdupetoggle",
+        ),
+        PrefItem.Switch(
+            key = "p.msgdupetoggle",
+            title = getString(R.string.p_msgdupetoggle),
+            summary = getString(R.string.p_msgdupetoggle_summary),
+        ),
+        PrefItem.EditText(
+            key = "p.msgdupetime",
+            title = getString(R.string.p_msgdupetime_title),
+            summary = getString(R.string.p_msgdupetime_summary),
+            dialogTitle = getString(R.string.p_msgdupetime_entry),
+            default = "30",
+            isNumeric = true,
+            dependency = "p.msgdupetoggle",
+        ),
+    )
 }

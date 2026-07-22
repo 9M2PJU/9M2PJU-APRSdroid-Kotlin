@@ -48,7 +48,7 @@ object MapModes {
     @JvmStatic
     fun initialize(ctx: Context) {
         if (allMapModes.isNotEmpty()) return
-        allMapModes += MapsforgeOnlineMode("osm", R.id.mapsforge, null, "TODO")
+        allMapModes += MapsforgeOnlineMode("osm", 0, null, "TODO")
     }
 
     @JvmStatic
