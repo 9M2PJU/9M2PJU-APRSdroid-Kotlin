@@ -3,13 +3,48 @@ package org.aprsdroid.app
 import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
+import android.os.Environment
 import android.view.View
 import android.view.WindowInsets
+import androidx.core.content.FileProvider
 import androidx.core.view.WindowCompat
+import java.io.File
 
 object UIHelper {
+
+    /**
+     * Get the directory for exporting files (profiles, logs, etc.).
+     * Uses Documents directory on KitKat+ (API 19+), external storage root on older.
+     */
+    @JvmStatic
+    fun getExportDirectory(ctx: Context): File {
+        val base = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+        } else {
+            Environment.getExternalStorageDirectory()
+        }
+        return File(base, "APRSdroid")
+    }
+
+    /**
+     * Share a file via Android's share sheet (ACTION_SEND).
+     */
+    @JvmStatic
+    fun shareFile(ctx: Context, file: File, filename: String) {
+        ctx.startActivity(
+            Intent.createChooser(
+                Intent(Intent.ACTION_SEND)
+                    .setType("text/plain")
+                    .putExtra(Intent.EXTRA_STREAM,
+                        FileProvider.getUriForFile(ctx, "org.aprsdroid.fileprovider", file))
+                    .putExtra(Intent.EXTRA_SUBJECT, filename),
+                file.toString(),
+            ),
+        )
+    }
 
     /**
      * Register a BroadcastReceiver with the appropriate flags for Android 14+

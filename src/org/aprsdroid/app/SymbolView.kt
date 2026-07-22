@@ -23,7 +23,7 @@ import android.widget.ImageView
  */
 class SymbolView(context: Context, attrs: AttributeSet?) : ImageView(context, attrs) {
 
-    private var symbol: String = "/$"
+    internal var symbol: String = "/$"
     private val iconbitmap: Bitmap = Companion.getSingleton(context)
     private val symbolSize: Int = iconbitmap.width / 16
 

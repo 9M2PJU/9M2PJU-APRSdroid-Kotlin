@@ -1,23 +1,45 @@
 package org.aprsdroid.app
 
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import org.aprsdroid.app.ui.PlaceholderScreen
+import android.preference.PreferenceActivity
 
 /**
- * Kotlin/Compose skeleton for `MessagingPrefs`.
+ * Kotlin port of the Scala `MessagingPrefs`.
  *
- * Messaging preferences, loaded from `res/xml/messaging.xml` in the
- * Scala version. Full UI pending migration.
+ * Uses the XML preference framework (res/xml/messaging.xml). Reloads
+ * the preference screen when relevant keys change so that dependent
+ * preferences are shown/hidden correctly.
  */
-class MessagingPrefs : ComponentActivity() {
+class MessagingPrefs : PreferenceActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private val prefs by lazy { PrefsWrapper(this) }
+
+    private fun loadXml() {
+        addPreferencesFromResource(R.xml.messaging)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UIHelper.applySystemBarInsets(this)
-        setContent {
-            PlaceholderScreen(getString(R.string.p__messaging))
+        loadXml()
+        preferenceScreen.sharedPreferences
+            .registerOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        preferenceScreen.sharedPreferences
+            .unregisterOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onSharedPreferenceChanged(sp: SharedPreferences?, key: String?) {
+        when (key) {
+            "p.messaging", "p.retry", "p.ackdupetoggle", "p.ackdupe",
+            "p.msgdupetoggle", "p.msgdupetime" -> {
+                preferenceScreen = null
+                loadXml()
+            }
         }
     }
 }
