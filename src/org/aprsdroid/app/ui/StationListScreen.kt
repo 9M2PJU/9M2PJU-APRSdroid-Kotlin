@@ -106,7 +106,7 @@ private fun StationItem(station: StationEntity, viewModel: StationListViewModel)
         // For now, just show relative time
         Text(
             text = android.text.format.DateUtils.getRelativeTimeSpanString(
-                viewModel.getApplication(), station.ts,
+                viewModel.app, station.ts,
             ).toString(),
             style = MaterialTheme.typography.bodySmall,
             color = Color(ageColor),

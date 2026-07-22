@@ -25,6 +25,7 @@ class StationListViewModel(
     private val myCall: String,
 ) : AndroidViewModel(app) {
 
+    internal val app = app
     private val db = AprsDatabase.get(app)
     private val prefs = PrefsWrapper(app)
 
@@ -84,17 +85,17 @@ class StationListViewModel(
         }
     }
 
+    class Factory(private val app: Application, private val myCall: String) :
+        ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return StationListViewModel(app, myCall) as T
+        }
+    }
+
     companion object {
         const val MODE_SINGLE = 0
         const val MODE_NEIGHBORS = 1
         const val MODE_SSIDS = 2
-
-        class Factory(private val app: Application, private val myCall: String) :
-            ViewModelProvider.Factory {
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return StationListViewModel(app, myCall) as T
-            }
-        }
     }
 }
