@@ -10,6 +10,7 @@ import org.aprsdroid.app.data.AprsDatabase
 import org.aprsdroid.app.data.PostEntity
 import org.json.JSONObject
 import java.util.Scanner
+import kotlinx.coroutines.runBlocking
 
 /**
  * Kotlin port of the Scala `ProfileImportActivity`.
@@ -56,12 +57,14 @@ class ProfileImportActivity : AppCompatActivity() {
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 
             Thread {
-                db.postDao().addPost(
-                    System.currentTimeMillis(),
-                    PostEntity.TYPE_INFO,
-                    getString(R.string.profile_import_activity),
-                    msg,
-                )
+                runBlocking {
+                    db.postDao().addPost(
+                        System.currentTimeMillis(),
+                        PostEntity.TYPE_INFO,
+                        getString(R.string.profile_import_activity),
+                        msg,
+                    )
+                }
             }.start()
 
             startActivity(Intent(this, LogActivity::class.java))
@@ -69,12 +72,14 @@ class ProfileImportActivity : AppCompatActivity() {
             val errmsg = getString(R.string.profile_import_error, e.message)
             Toast.makeText(this, errmsg, Toast.LENGTH_LONG).show()
             Thread {
-                db.postDao().addPost(
-                    System.currentTimeMillis(),
-                    PostEntity.TYPE_ERROR,
-                    getString(R.string.profile_import_activity),
-                    errmsg,
-                )
+                runBlocking {
+                    db.postDao().addPost(
+                        System.currentTimeMillis(),
+                        PostEntity.TYPE_ERROR,
+                        getString(R.string.profile_import_activity),
+                        errmsg,
+                    )
+                }
             }.start()
             e.printStackTrace()
         }

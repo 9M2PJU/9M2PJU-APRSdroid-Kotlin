@@ -17,6 +17,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.security.KeyStore
 import java.security.cert.X509Certificate
+import kotlinx.coroutines.runBlocking
 
 /**
  * Kotlin port of the Scala `KeyfileImportActivity`.
@@ -93,12 +94,14 @@ class KeyfileImportActivity : AppCompatActivity() {
                 val msg = getString(R.string.ssl_import_ok, callsign)
                 Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
                 Thread {
-                    db.postDao().addPost(
-                        System.currentTimeMillis(),
-                        PostEntity.TYPE_INFO,
-                        getString(R.string.post_info),
-                        msg,
-                    )
+                    runBlocking {
+                        db.postDao().addPost(
+                            System.currentTimeMillis(),
+                            PostEntity.TYPE_INFO,
+                            getString(R.string.post_info),
+                            msg,
+                        )
+                    }
                 }.start()
                 startActivity(Intent(this, LogActivity::class.java))
             }
@@ -106,12 +109,14 @@ class KeyfileImportActivity : AppCompatActivity() {
             val errmsg = getString(R.string.ssl_import_error, e.message)
             Toast.makeText(this, errmsg, Toast.LENGTH_LONG).show()
             Thread {
-                db.postDao().addPost(
-                    System.currentTimeMillis(),
-                    PostEntity.TYPE_ERROR,
-                    getString(R.string.post_error),
-                    errmsg,
-                )
+                runBlocking {
+                    db.postDao().addPost(
+                        System.currentTimeMillis(),
+                        PostEntity.TYPE_ERROR,
+                        getString(R.string.post_error),
+                        errmsg,
+                    )
+                }
             }.start()
             e.printStackTrace()
         }

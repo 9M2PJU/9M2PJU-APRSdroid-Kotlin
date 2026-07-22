@@ -51,7 +51,7 @@ class LocationPrefs : PreferenceActivity(),
 
     private fun loadXml() {
         addPreferencesFromResource(R.xml.location)
-        addPreferencesFromResource(LocationSource.instanciatePrefsAct(prefs))
+        addPreferencesFromResource(LocationSources.instanciatePrefsAct(prefs))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
