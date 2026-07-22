@@ -49,14 +49,6 @@ def versionCodeDate() {
     }
 }
 
-def mapsApiKey() {
-    Properties properties = new Properties()
-    try {
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
-    } catch(Exception ex) {}
-    properties.getProperty('mapsApiKey', "YOUR_API_KEY_HERE")
-}
-
 android {
     namespace 'org.aprsdroid.app'
     compileSdk 35
@@ -70,7 +62,6 @@ android {
         resValue "string", "build_revision", "$build_revision"
         resValue "string", "build_date", "$build_date"
         resValue "string", "build_version", "$build_version"
-        resValue "string", "google_maps_key", mapsApiKey()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -189,9 +180,9 @@ dependencies {
     // Material Components (for XML-based screens still in use)
     implementation 'com.google.android.material:material:1.12.0'
 
-    // Maps
-    implementation 'com.google.android.gms:play-services-maps:19.0.0'
-    implementation 'com.google.maps.android:android-maps-utils:3.8.2'
+    // Maps — OpenStreetMap only (see AGENTS.md). The Google Maps
+    // dependencies from the Scala version have been removed.
+    // OSM tile rendering / offline map support will be added with MapAct.
 
     // OkIO (used by APRS protocol)
     implementation 'com.squareup.okio:okio:3.9.0'

@@ -26,7 +26,7 @@ jobs:
           submodules: recursive
           fetch-depth: 0   # git describe needs tags/history for versionName
 
-      - name: Set up JDK 17 (for Android SDK setup)
+      - name: Set up JDK 17 (Kotlin/Compose build)
         uses: actions/setup-java@v5
         with:
           distribution: temurin
@@ -39,21 +39,11 @@ jobs:
           yes | "$SDKMANAGER" --licenses >/dev/null 2>&1 || true
           "$SDKMANAGER" --install \
             "platform-tools" \
-            "build-tools;33.0.2" \
-            "platforms;android-33"
+            "build-tools;35.0.0" \
+            "platforms;android-35"
 
-      - name: Switch to JDK 11 (for Scala 2.11 + modern AndroidX)
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '11'
-
-      - name: Write local.properties
+      - name: Accept SDK licenses
         run: |
-          # mapsApiKey is optional; falls back to a placeholder if unset
-          if [ -n "${{ secrets.MAPS_API_KEY }}" ]; then
-            echo "mapsApiKey=${{ secrets.MAPS_API_KEY }}" >> local.properties
-          fi
           # Accept any SDK licenses just in case
           yes | sdkmanager --licenses >/dev/null 2>&1 || true
 
@@ -122,12 +112,12 @@ jobs:
             exit 1
           fi
           echo "Signed APK: $apk"
-          "$ANDROID_SDK_ROOT/build-tools/33.0.2/apksigner" verify --print-certs "$apk" | head -20
+          "$ANDROID_SDK_ROOT/build-tools/35.0.0/apksigner" verify --print-certs "$apk" | head -20
 
       - name: Verify signer identity
         run: |
           apk=$(find build/outputs/apk/release -name '*.apk' ! -name '*-unsigned.apk' | head -1)
-          dn=$("$ANDROID_SDK_ROOT/build-tools/33.0.2/apksigner" verify --print-certs "$apk" \
+          dn=$("$ANDROID_SDK_ROOT/build-tools/35.0.0/apksigner" verify --print-certs "$apk" \
             | grep -i 'DN:' | head -1)
           echo "Signer DN: $dn"
           if echo "$dn" | grep -q "HamRadio.my"; then

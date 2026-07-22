@@ -3,21 +3,20 @@ package org.aprsdroid.app
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
 import android.view.MenuItem
-import com.google.android.gms.common.GoogleApiAvailability
-import com.google.android.gms.maps.GoogleMap
 
 /**
  * Kotlin port of the Scala `MapMode` / `MapModes` system.
  *
- * Describes the available map renderers (Google Maps, MapsForge online,
- * MapsForge offline) and dispatches to the right activity.
+ * Describes the available map renderers and dispatches to the right
+ * activity. Per the project preferences (see AGENTS.md) the Kotlin
+ * rewrite uses OpenStreetMap-based rendering only — the Google Maps
+ * mode from the Scala version has been removed.
  *
- * The Google Maps and MapsForge activities are not yet ported — until they
- * are, the map modes fall back to `HubActivity` as a placeholder view class.
+ * The OSM map activity (`MapAct`) is currently a Compose placeholder
+ * while the full tile renderer + station overlay is being ported.
  */
 open class MapMode(
     val tag: String,
@@ -28,36 +27,19 @@ open class MapMode(
     open fun isAvailable(ctx: Context): Boolean = true
 }
 
-class GoogleMapMode(
-    tag: String,
-    menuId: Int,
-    title: String?,
-    val mapType: Int,
-) : MapMode(tag, menuId, title, resolveMapClass("org.aprsdroid.app.GoogleMapAct")) {
-
-    override fun isAvailable(ctx: Context): Boolean {
-        return try {
-            ctx.packageManager.getPackageInfo(GoogleApiAvailability.GOOGLE_PLAY_SERVICES_PACKAGE, 0)
-            true
-        } catch (_: PackageManager.NameNotFoundException) {
-            false
-        }
-    }
-}
-
 class MapsforgeOnlineMode(
     tag: String,
     menuId: Int,
     title: String?,
     val foo: String,
-) : MapMode(tag, menuId, title, resolveMapClass("org.aprsdroid.app.MapAct"))
+) : MapMode(tag, menuId, title, MapAct::class.java)
 
 class MapsforgeFileMode(
     tag: String,
     menuId: Int,
     title: String?,
     val file: String,
-) : MapMode(tag, menuId, title, resolveMapClass("org.aprsdroid.app.MapAct"))
+) : MapMode(tag, menuId, title, MapAct::class.java)
 
 object MapModes {
 
@@ -66,8 +48,6 @@ object MapModes {
     @JvmStatic
     fun initialize(ctx: Context) {
         if (allMapModes.isNotEmpty()) return
-        allMapModes += GoogleMapMode("google", R.id.normal, null, GoogleMap.MAP_TYPE_NORMAL)
-        allMapModes += GoogleMapMode("satellite", R.id.satellite, null, GoogleMap.MAP_TYPE_HYBRID)
         allMapModes += MapsforgeOnlineMode("osm", R.id.mapsforge, null, "TODO")
     }
 
@@ -79,9 +59,6 @@ object MapModes {
     @JvmStatic
     fun defaultMapMode(ctx: Context, prefs: PrefsWrapper): MapMode {
         initialize(ctx)
-        // Default to OSM maps — Google Maps requires a build-time API key
-        // that is not included in this mod. Users who build from source
-        // with their own key can still select Google Maps from the menu.
         val tag = prefs.getString("mapmode", "osm")
         Log.d("MapModes", "tag is $tag")
         var default: MapMode? = null
@@ -127,17 +104,5 @@ object MapModes {
             if (mode.menuId == mi.itemId) return mode
         }
         return null
-    }
-}
-
-/**
- * Resolve a map activity class by name, falling back to [HubActivity]
- * until the real Google/MapsForge activities are ported.
- */
-private fun resolveMapClass(name: String): Class<*> {
-    return try {
-        Class.forName(name)
-    } catch (_: ClassNotFoundException) {
-        HubActivity::class.java
     }
 }
