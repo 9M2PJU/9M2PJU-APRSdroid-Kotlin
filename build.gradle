@@ -1,0 +1,204 @@
+// Top-level build file — Kotlin + Jetpack Compose rewrite
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.5.2'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.20'
+        classpath 'com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:2.0.20-1.0.25'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+apply plugin: 'com.google.devtools.ksp'
+
+ext {
+    build_date = "${new Date().format('yyyy-MM-dd')}"
+    def descOut = new ByteArrayOutputStream()
+    exec {
+        executable "git"
+        args "describe", "--tags", "--match", "v*"
+        standardOutput descOut
+        ignoreExitValue true
+    }
+    def desc = descOut.toString().trim() ?: "v2.1.0"
+    build_revision = desc.split('-')[0]
+    build_version = "APRSdroid ${build_revision} ${build_date}"
+}
+
+def versionCodeDate() {
+    if (project.hasProperty("RELEASE_MINOR")) {
+        return new Date().format("yyyyMMdd" + RELEASE_MINOR).toInteger()
+    } else {
+        return new Date().format("yyyyMMdd00").toInteger()
+    }
+}
+
+def mapsApiKey() {
+    Properties properties = new Properties()
+    try {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    } catch(Exception ex) {}
+    properties.getProperty('mapsApiKey', "AIzaSyA12R_iI_upYQ33FWnPU_8GlMKrEmjDxiQ")
+}
+
+android {
+    namespace 'org.aprsdroid.app'
+    compileSdk 35
+    buildToolsVersion "35.0.0"
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 35
+        versionName "$build_revision"
+        versionCode versionCodeDate()
+        resValue "string", "build_revision", "$build_revision"
+        resValue "string", "build_date", "$build_date"
+        resValue "string", "build_version", "$build_version"
+        resValue "string", "google_maps_key", mapsApiKey()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    useLibrary 'org.apache.http.legacy'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        compose true
+        buildConfig true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.5.15'
+    }
+
+    packagingOptions {
+        resources {
+            excludes += [
+                'META-INF/com.android.tools/proguard/coroutines.pro',
+                'META-INF/proguard/coroutines.pro',
+                'META-INF/INDEX.LIST',
+                'META-INF/io.netty.versions.properties'
+            ]
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+        }
+    }
+
+    if (project.hasProperty("RELEASE_KEY_ALIAS")) {
+        signingConfigs {
+            release {
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+            }
+        }
+        buildTypes {
+            release {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+        androidTest {
+            java.srcDirs = ['androidTest/java']
+        }
+        test {
+            java.srcDirs = ['test/java']
+        }
+    }
+
+    lint {
+        disable 'MissingTranslation'
+        disable 'InvalidPackage'
+        abortOnError false
+    }
+}
+
+dependencies {
+    // Legacy JARs (Java — work fine from Kotlin)
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // Kotlin + Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
+
+    // AndroidX Core
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.activity:activity-compose:1.9.2'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.6'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6'
+    implementation 'androidx.lifecycle:lifecycle-service:2.8.6'
+
+    // Jetpack Compose
+    def composeBom = platform('androidx.compose:compose-bom:2024.09.02')
+    implementation composeBom
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.ui:ui-graphics'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.compose.material3:material3'
+    implementation 'androidx.compose.material:material-icons-extended'
+    implementation 'androidx.navigation:navigation-compose:2.8.0'
+
+    // Room Database
+    implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-ktx:2.6.1'
+    ksp 'androidx.room:room-compiler:2.6.1'
+
+    // Material Components (for XML-based screens still in use)
+    implementation 'com.google.android.material:material:1.12.0'
+
+    // Maps
+    implementation 'com.google.android.gms:play-services-maps:19.0.0'
+    implementation 'com.google.maps.android:android-maps-utils:3.8.2'
+
+    // OkIO (used by APRS protocol)
+    implementation 'com.squareup.okio:okio:3.9.0'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation composeBom
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
+}

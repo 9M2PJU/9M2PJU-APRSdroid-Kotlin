@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- APRSdroid strings.xml - this file contains strings which need to be translated -->
+<resources>
+<string name="app_name">APRSdroid 9M2PJU</string>
+<string name="app_prefs">APRSdroid Innstillinger</string>
+<string name="app_map">APRSdroid Kart</string>
+<string name="app_hub">APRSdroid sentral</string>
+<string name="app_log">APRSdroid Log</string>
+<string name="app_sta">Enhetsinformasjon</string>
+<string name="app_messages">Meldinger.</string>
+<string name="app_messages_clear">Slett beskjeder</string>
+<!-- APRSdroid activity -->
+<string name="firstrun">Du må konfigurere APRSdroid med ditt kallesignal og din valideringsnøkkel</string>
+<string name="wrongpasscode">Din valideringsnøkkel samsvarer ikke med ditt kallesignal</string>
+<string name="e_toolong_callsign">Your callsign is too long for Packet Radio!</string>
+<string name="anon_warning">Dine possisjoner vil ikke bli videresendt uten en vallideringsnøkkel</string>
+<string name="mininterval">Minimum oppdateringstid 1 minutt!</string>
+<string name="singlelog">Send Position</string>
+<string name="startlog">Start sporing</string>
+<string name="stoplog">Stopp sporing</string>
+
+<string name="empty_logview">Du har hverken sent elle mottatt noen pakker. \n\n Trykk \"Meny\" knappen for å sende en enkeltpakke eller for å begynne å følge possisjonen din. \n\n Du kan også endre innstillingene via menyen.</string>
+
+<!-- Maps activity -->
+<string name="sta_lastreport">%s Siste rapport.</string>
+<string name="map_track_call">Følger %s...</string>
+<string name="map_track_unknown">Position for %s unknown!</string>
+<string name="map_select">Velg enhet</string>
+
+<string name="map_loading">Laster inn...</string>
+
+<!-- StationInfo activity -->
+<string name="sta_ssids">Enhetens SSID</string>
+<string name="sta_history">Enhetshistorikk</string>
+<string name="sta_map">Kart</string>
+<string name="sta_extmap">External Map</string>
+<string name="sta_aprsfi">aprs.fi</string>
+<string name="sta_qrzcom">QRZ.com</string>
+
+<!-- Conversations activity -->
+<string name="msg_send_new">Sende melding til....</string>
+<string name="msg_message_text">Meldingstekst</string>
+<string name="msg_empty_list">Det finne ingen lagrede samtaler.</string>
+<string name="msg_stored_offline">Meldingen vil sendes så snart du er innenfor dekning.</string>
+<!-- Message activity -->
+<string name="msg_from">Melding fra %s</string>
+<string name="msg_to">Melding til %s</string>
+<string name="msg_abort">Avbryt sendingen</string>
+<string name="msg_restart">Start sendingen på nytt</string>
+<string name="msg_type_rejected">avvist</string>
+<string name="msg_type_aborted">avbrutt</string>
+
+<!-- AprsService -->
+<string name="aprsservice">APRSdroid tjeneste</string>
+<string name="service_once">APRS tjeneste enkeltpakke %1$s, %2$s.</string>
+<string name="service_start">APRS Tjeneste startet:  %1$s, %2$s.</string>
+<string name="service_stop">APRS tjeneste stoppet.</string>
+<string name="service_no_location">Du må enten aktivisere GPS eller nettverksposisjonering for at APRSdroid skal virke ordentlig !</string>
+<string name="service_sm_no_gps">SmartBeaconing™ krever at GPS er slått på!</string>
+<!-- service result codes -->
+<string name="post_error">Feil</string>
+<string name="post_incmg">mottatt</string>
+<string name="post_info"/>
+<string name="post_connecting">kobler til %1$s:%2$d...</string>
+<string name="post_reconnect">Mistet forbindelsen, prøver igjen om %d sekunder...</string>
+
+<!-- first run dialog -->
+<string name="fr_title">Velkommen til APRSdroid!</string>
+<string name="fr_text">Denne programvaren kan kun benyttes av lisensierte radioamatører !</string>
+<string name="fr_text2">Du bes oppgi din signatur for å bruke programvaren. for å videresende pakker vil også en APRS-IS valideringsnøkkel være påkrevd.</string>
+<string name="fr_text3">Only needed for APRS over the Internet:</string>
+
+<!-- about dialog -->
+
+<!-- map view -->
+<string name="map_overlays">Overlegg</string>
+<string name="map_google">Google: Map</string>
+<string name="map_satellite">Google: Satellite</string>
+<string name="map_osm">OpenStreetMap.org</string>
+<!-- intended use is in map style menu: "file name of offline map (Offline)" -->
+<string name="map_offline"> %s (Offline)</string>
+<string name="map_objects">APRS Objekter</string>
+
+<!-- map view -->
+<string name="age">Vis siste...</string>
+<string name="age_30">30 minutter</string>
+<string name="age_2h">2 timer</string>
+<string name="age_12h">12 timer</string>
+<string name="age_1d">1 dag</string>
+<string name="age_2d">2 dager</string>
+
+
+<!-- options menu -->
+<string name="about">Om</string>
+<string name="show_hub">vis senter</string>
+<string name="show_map">vis kart</string>
+<string name="show_log">Vis logg</string>
+<string name="export_log">Export Log</string>
+<string name="export_empty">Nothing to export</string>
+<string name="clear_log">tøm logg</string>
+<string name="quit">Avslutt</string>
+<string name="preferences">Brukervalg</string>
+<!-- preferences -->
+<string name="profile_load">Load profile...</string>
+<string name="profile_export">Export profile...</string>
+<string name="p__ham">Amatørradio</string>
+<string name="p_callsign">Kallesignal</string>
+<string name="p_callsign_nossid">Kallesignal (uten SSID)</string>
+<string name="p_callsign_summary">Ditt radioamatør kallesignal</string>
+<string name="p_callsign_entry">Skriv ditt kallesignal</string>
+<string name="p_passcode">APRS-IS valideringsnøkkel</string>
+<string name="p_passcode_summary">APRS-IS valideringsnøkkel</string>
+<string name="p_passcode_entry">Skriv inn valideringsnøkkel for ditt kallesignal</string>
+<string name="p_passreq">hent valideringsnøkkel</string>
+<string name="p_passreq_summary">hent APRS-IS valideringsnøkkel på internett</string>
+<string name="p__aprs">APRS innstillinger</string>
+<string name="p_ssid">SSID</string>
+<string name="p_ssid_summary">Statsjonstype (1..15; 9=Mobil, 10=APRS-IS)</string>
+<string name="p_ssid_entry">Skriv SSID for din stasjon</string>
+<!-- array of station types (SSID) -->
+<string-array name="p_ssid_e">
+	<item>(ingen) Hovedstasjon</item>
+	<item>1: vanlig tilleggsenhet</item>
+	<item>2: vanlig tilleggsenhet</item>
+	<item>3: vanlig tilleggsenhet</item>
+	<item>4: vanlig tilleggsenhet</item>
+	<item>5:Annet nettverk (D-star, 3G)</item>
+	<item>6: Satelitt</item>
+	<item>7: Handholdt radio (traskesnakker)</item>
+	<item>8: Båt / skip</item>
+	<item>9: Mobil stasjon</item>
+	<item>10: APRS-IS (ikke radio)</item>
+	<item>11:balong, luftfartøy, romfartøy</item>
+	<item>12:APRStt,DTMF,...(enveis)</item>
+	<item>13: værstasjon</item>
+	<item>14: Befrakter</item>
+	<item>15: vanlig tilleggsenhet</item>
+</string-array>
+<string name="p_symbol">APRS symbol</string>
+<string name="p_symbol_summary">Ditt symbol for kartvisning</string>
+<string name="p_symbol_overlay">Overlay:</string>
+<string name="p_symbol_result">Result:</string>
+<string name="p_frequency">Voice frequency</string>
+<string name="p_frequency_summary">Your voice frequency [MHz]</string>
+<string name="p_status">kommentarfelt</string>
+<string name="p_status_summary">Tekst / melding etter koordinater</string>
+<string name="p_status_entry">tast inn ditt meldingstillegg</string>
+<string name="p__connection">APRS Tilkobling</string>
+<string name="p_conntype">Tilkoblingsprotokoll</string>
+<string name="p_conntype_entry">Velg tilkoblingsprotokoll</string>
+<string name="p_link">Connection Type</string>
+<string name="p_link_entry">Choose the link type</string>
+<string name="p_connsetup">Brukervalg for tilkobling</string>
+<string name="p_connlog">Tilkoblingslogg</string>
+<string name="p_connlog_summary">Rikelige statusmeldinger til logg</string>
+<!-- array of connection types -->
+<string name="p_conn_aprsis">Internet (APRS-IS)</string>
+<string name="p_conn_afsk">Audio (AFSK)</string>
+<string name="p_conn_kiss">TNC (KISS)</string>
+<string name="p_conn_tnc2">TNC (plaintext TNC2)</string>
+<string name="p_conn_kwd">Kenwood (NMEA waypoint)</string>
+<string name="p_conn_kwd_info">Kenwood setup help</string>
+<string name="p_conn_kwd_gps">Use Android GPS</string>
+<string name="p_conn_kwd_gps_summary">Forward NMEA sentences to radio</string>
+<string name="p_conn_kwd_gps_debug">Display GPS in log</string>
+<string name="p_conn_kwd_gps_debug_summary">Show raw NMEA in APRSdroid</string>
+<!-- array of APRS-IS protocols -->
+<string name="p_aprsis_tcp">TCP tilkobling</string>
+<string name="p_aprsis_http">HTTP POST (kun sending)</string>
+<string name="p_aprsis_udp">UDP (kun sending)</string>
+<!-- array of TNC link types -->
+<string name="p_link_bt">Bluetooth SPP</string>
+<string name="p_link_tcpip">TCP/IP</string>
+<string name="p_link_usb">USB Serial</string>
+<!-- array of location sources -->
+<string name="p_source_manual">Manuell posisjon</string>
+<string name="p_source_periodic">Periodisk GPS/Nettverk posisjon</string>
+<string name="p_source_smart">SmartBeaconing™ Posisjon</string>
+<!-- manual position -->
+<string name="p_source_lat">Breddegrad</string>
+<string name="p_source_lon">Lengdegrad</string>
+<string name="p_source_coord">Koordinat</string>
+<!-- select your position from a map -->
+<string name="p_source_from_map">Choose on map</string>
+<string name="p_source_from_map_save">Save position</string>
+<string name="p_source_get_last">bruk sist kjente GPS posisjon</string>
+<string name="p_source_auto">Automatisk rapportering</string>
+<string name="p_source_auto_summary">Utfør periodisk rapportering</string>
+
+
+<!-- privacy settings -->
+<string name="p_privacy">Ikke send posisjonen (personvern)</string>
+<string name="p_privacy_summary">tvetydig posisjon med mere</string>
+<string name="p_priv_ambiguity">tvetydig posisjon</string>
+<string name="p_priv_ambiguity_summary">redusert nøyaktighet for egen posisjonds rapport</string>
+<string name="p_ambiguity_off">av (DD° MM.mm\')</string>
+<string name="p_ambiguity_ddmmm">1 (DD° MM.m\')</string>
+<string name="p_ambiguity_ddmm">2 (DD° MM\')</string>
+<string name="p_ambiguity_ddm">3 (DD° Mx\')</string>
+<string name="p_ambiguity_dd">4 (DD°)</string>
+<string name="p_priv_spdbear">Sendehastighet &amp; Retning</string>
+<string name="p_priv_spdbear_summary">inkluder hastighet og retning i posisjonsrapporter</string>
+<string name="p_priv_altitude">Send Høydeinformasjon</string>
+<string name="p_priv_altitude_summary">inkluder høydeinformasjon i posisjonsrapporter</string>
+
+<!-- connection type properties -->
+<string name="p_host">Tjener</string>
+<string name="p_host_summary">APRS-IS server (port 8080) for å sende fyrsignaler</string>
+<string name="p_host_entry">Skriv APRS-IS tjeners vertsnavn</string>
+<string name="p_host_hint">vert:port</string>
+<string name="p__position">Posisjonsrapport</string>
+<string name="p_locsource">Lokaliseringskilde</string>
+<string name="p_locsource_summary">Manuell, periodisk eller SmartBeaconing™</string>
+<string name="p__location">Stedsinnstillinger</string>
+
+<string name="p_smartbeaconing">SmartBeaconing™</string>
+<string name="p_sb_help">SmartBeaconing™ help</string>
+<string name="p_sb_fast_speed">Fast Speed [km/h]</string>
+<string name="p_sb_fast_speed_summary">Minimum speed for fast position updates</string>
+<string name="p_sb_fast_rate">Fast Rate [s]</string>
+<string name="p_sb_fast_rate_summary">Beacon rate at fast speed</string>
+<string name="p_sb_slow_speed">Slow Speed [km/h]</string>
+<string name="p_sb_slow_speed_summary">Maximum speed for slow position updates</string>
+<string name="p_sb_slow_rate">Slow Rate [s]</string>
+<string name="p_sb_slow_rate_summary">Beacon rate at slow speed</string>
+<!-- corner pegging should not be translated -->
+<string name="p_corner_pegging">Corner Pegging</string>
+<string name="p_cp_turn_time">Min Turn Time [s]</string>
+<string name="p_cp_turn_time_summary">Minimum beacon rate when changing direction</string>
+<string name="p_cp_turn_angle">Min Turn Angle [°]</string>
+<string name="p_cp_turn_angle_summary">Minimum angle at high speed</string>
+<string name="p_cp_turn_slope">Turn Slope</string>
+<string name="p_cp_turn_slope_summary">Influence of speed on the minimum angle</string>
+
+<string name="p_interval">Minimum oppdateringstid</string>
+<string name="p_interval_summary">Minutter mellom beacon sending</string>
+<string name="p_interval_entry">Skriv oppdateringsintervall [min]</string>
+<string name="p_distance">Minimum oppdateringsavstand</string>
+<string name="p_distance_summary">Kilometer mellom beacon sending (sett til 0 for kun tidsavhengighet)</string>
+<string name="p_distance_entry">Skriv oppdateringsavstand [km]</string>
+<string name="p_speedbrg">Avvent hastighet &amp; retning</string>
+<string name="p_speedbrg_summary">Hold GPS aktiv (på) for mer presis posisjonsdata</string>
+<string name="p_netloc">Bruk nettverkslokasjon</string>
+<string name="p_netloc_summary">Hent posisjon fra mobilnettverket (GSM)</string>
+<string name="p_gps">GPS forutsigelse</string>
+<string name="p_gps_summary">Batteribruk mot posisjonskvalitet</string>
+<string name="p_gps_entry">Vær venlig å oppgi GPS presisjonen</string>
+<!-- array of GPS precisions -->
+<string name="p_gps_always">Høy (alltid på)</string>
+<string name="p_gps_med">Middels</string>
+<string name="p_gps_low">Lavt</string>
+<string name="p_keepscreen">ikke bruk skjermsparing</string>
+<string name="p_keepscreen_summary">Ikke skru av skjermen når APRSdroid har fokus</string>
+
+<!-- messaging -->
+<string name="p__display">Skjerm og varsling</string>
+<string name="p__notification">Varsling.</string>
+<string name="p__notification_summary">Varsling for meldinger og posisjonsrapporter</string>
+<string name="p_msg">Innkommende meldinger</string>
+<string name="p_msg_led">Blinkende LED</string>
+<string name="p_msg_led_on">LED-varslling er på</string>
+<string name="p_msg_led_off">LED varsling er av</string>
+<string name="p_msg_vibr">Vibrasjon</string>
+<string name="p_msg_vibr_on">Vibrasjonsvarsling er på</string>
+<string name="p_msg_vibr_off">Vibrasjonsvarsling er av</string>
+<string name="p_msg_ring">Ringetone</string>
+<string name="p_msg_ring_summary">Tone for mottatte meldinger</string>
+<string name="p_pos">Egne posisjonsrapporter</string>
+<string name="p_pos_ring">Ringetone</string>
+<string name="p_pos_ring_summary">Tone for utsendte posisjonsrapporter</string>
+<string name="p_dgp">Digipeated Own Packets</string>
+<string name="p_dgp_ring">Ringetone</string>
+<string name="p_dgp_ring_summary">Tone for digipeated packets</string>
+
+<string name="got_digipeated">Digipeated by %1$s: %2$s</string>
+<string name="status_linkoff">Error: %s</string>
+<string name="status_linkon">Connected: %s</string>
+
+<!-- AFSK settings -->
+<string name="p_aprs_path">APRS digi sti</string>
+<string name="p_aprs_path_hint">hopp1, hopp 2, ...</string>
+<string name="p_aprs_path_summary">Rekkefølge av repeatere</string>
+<string name="p_aprs_path_entry">Tast inn komma sepparert digital sti</string>
+<string name="p_afsk_prefix">Ramme synk prefiks</string>
+<string name="p_afsk_prefix_summary">No-Op Preamble (f.eks. for VOX styring)</string>
+<string name="p_afsk_prefix_entry">Tast inn prefiks tid [ms]</string>
+<string name="p_afsk_hqdemod">Høykvalitets demodulator</string>
+<string name="p_afsk_hqdemod_summary">javAX25lib: 800 MHz CPU er påkrevd</string>
+<string name="p_afsk_btsco">Blåtann hodetelefon</string>
+<string name="p_afsk_btsco_summary">Bruk blåtann (SCO) hodetelefon for AFSK</string>
+<string name="p_afsk_output">Lydutgang</string>
+<string-array name="p_afsk_out_e">
+	<item>Stemmeoppringning</item>
+	<item>Ringetone</item>
+	<item>Musikk</item>
+	<item>Alarm</item>
+</string-array>
+
+<!-- TCP server settings -->
+<string name="p_tcp_server_summary">APRS-IS TCP tjener (port 14580) å kontakte</string>
+<string name="p_filterdist">Nærliggende område</string>
+<string name="p_filterdist_summary">Motta kun pakker fra stasjoner innen angitt radius</string>
+<string name="p_filterdist_entry">Radius for mottak av pakker [km]</string>
+<string name="p_filter">Packet filter</string>
+<string name="p_filter_hint">v/VENN o/OBJEKT</string>
+<string name="p_filter_summary">filter for innkommende pakker</string>
+<string name="p_filter_entry">Enter a filter for incoming packets</string>
+
+<string name="p_filterhelp">Meldingfilter hjelp</string>
+<string name="p_filterhelp_summary">referanse fra internett for APRS-IS filter</string>
+
+<string name="p_sotimeout">TCP socket tidsavbrudd</string>
+<string name="p_sotimeout_summary">Tid før tilbakestilling forbindelsen</string>
+<string name="p_sotimeout_entry">Avbruddsverdi i sekunder (0=deaktivering)</string>
+
+<string name="p_mapfile">Map file name</string>
+<string name="p_mapfile_summary">MapsForge map file for APRSdroid</string>
+<string name="p_mapfile_choose">Choose map file</string>
+<string name="mapfile_error">Error loading map file %s!</string>
+
+<string name="p_themefile">Theme file name</string>
+<string name="p_themefile_summary">MapsForge rendering theme (XML)</string>
+<string name="p_themefile_choose">Choose theme file</string>
+<string name="themefile_error">Error loading theme file %s!</string>
+
+<string name="kbdnav_title">Keyboard Navigation</string>
+<!-- keyboard navigation info -->
+<string-array name="kbdnav_lines">
+	<item>move map</item>
+	<item>zoom</item>
+	<item>menu</item>
+	<item>select</item>
+</string-array>
+
+  Knut Ole Petersen https://launchpad.net/~la9foa
+  Morten Arnesen https://launchpad.net/~morten-x
+
+<!-- Bluetooth TNC settings -->
+<string name="p_bt_client">Klientmodus</string>
+<string name="p_bt_client_summary">APRSdroid etablerer forbindelsen (Beholder Konfigurasjonen)</string>
+<string name="p_bt_tnc_device">TNC blåtann enhet</string>
+<string name="p_bt_tnc_device_summary">Velg din TNC fra parrede enheter</string>
+<string name="p_bt_tnc_device_entry">Velg enhet</string>
+<string name="p_bt_channel">Kanal</string>
+<string name="p_bt_channel_summary">Blåtann kanal på TNC</string>
+<string name="p_bt_channel_entry">Sett inn kanalnummer (som oftest "1"; tom for SPP)</string>
+
+<string name="p_tnc_init">TNC initieringsstreng</string>
+<string name="p_tnc_init_summary">Initialization commands for TNC (URL-encoded, Esc=%%1B, "%%"=%%25)</string>
+<string name="p_tnc_init_msg" formatted="false">URL-encoded string (Esc=%1B, \"%\"=%25), delay after each line:</string>
+
+<string name="p_tnc_delay">TNC init forsikelse</string>
+<string name="p_tnc_delay_summary">Ventetid etter hver linje</string>
+<string name="p_tnc_delay_entry">TNC init-forsikelse [ms]</string>
+
+<string name="p_bt_prefs">Blåtann innstillinger</string>
+<string name="p_bt_prefs_summary">Tillat blåtann å pare enheter</string>
+
+<string name="bt_error_unsupported">Blåtann er ikke støttet</string>
+<string name="bt_error_disabled">Vennligst aktiver blåtann</string>
+<string name="bt_error_no_tnc">Vennligst konfigurer en blåtann TNC</string>
+<string name="bt_error_connect">Could not connect to %s! Please turn on the device and close other Bluetooth connections.</string>
+<string name="bt_awaiting">Awaiting client…</string>
+<string name="bt_client_connected">Client %s connected.</string>
+<string name="bt_connecting_to_spp">Connecting to SPP service on %s…</string>
+<!-- connecting to [device name] channel [bluetooth channel id] -->
+<string name="bt_connecting_to_channel">Connecting to %s channel %d…</string>
+<string name="bt_connected">Connected to TNC.</string>
+<string name="bt_reconnecting">Reconnecting in 3s…</string>
+
+
+<string name="afsk_info_sco_req">Forlanger blåtann SCO forbindelse</string>
+<string name="afsk_info_sco_est">Blåtann SCO er etablert</string>
+
+<!-- TCP/IP TNC settings -->
+<string name="p_tcptnc_server_summary">KISS TCP tjener å kontakte</string>
+<string name="p_tcptnc_entry">Sett inn KISS tjeners vertsnavn</string>
+
+<!-- SSL strings -->
+<string name="ssl_import_activity">SSL certificate import</string>
+<string name="ssl_import_password">Please enter the certificate import password:</string>
+<string name="ssl_no_keyfile">No certificate for %s! Using passcode authentication.</string>
+<string name="ssl_import_ok">Imported certificate for %s.</string>
+<string name="ssl_import_error">Error importing certificate: %s!</string>
+<string name="ssl_expired">Your certificate has expired!</string>
+<string name="ssl_expire_in">Your certificate will expire in %d days!</string>
+
+<!-- Config import -->
+<string name="profile_import_activity">Profile import</string>
+<string name="profile_import_done">Imported profile: %s</string>
+<string name="profile_import_error">Error importing profile: %s!</string>
+
+<!-- (USB) Serial TNC settings -->
+<string name="p_serial_baudrate">Baud Rate</string>
+<string name="p_serial_baudrate_summary">Data rate of the serial port</string>
+<!-- (USB) Serial Errors -->
+<string name="p_serial_unsupported">Unsupported serial port!</string>
+<string name="p_serial_noperm">No permission for USB device!</string>
+<string name="p_serial_notfound">No USB device found!</string>
+
+<string name="no_perm_text">The following permissions are required:</string>
+</resources>

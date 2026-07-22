@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- APRSdroid strings.xml - this file contains strings which need to be translated -->
+<resources>
+<string name="app_name">APRSdroid 9M2PJU</string>
+<string name="app_prefs">Preferências do APRSdroid</string>
+<string name="app_map">Mapa APRSdroid</string>
+<string name="app_hub">Eixo APRSdroid</string>
+<string name="app_log">APRSdroid Log</string>
+<string name="app_sta">Informação da estação</string>
+<string name="app_messages">Mensagens</string>
+<string name="app_messages_clear">Limpar Mensagens</string>
+<!-- APRSdroid activity -->
+<string name="firstrun">Deve configurar o APRSdroid com o seu indicativo e password!</string>
+<string name="wrongpasscode">A palavra-passe está incorrecta.</string>
+<string name="e_toolong_callsign">Your callsign is too long for Packet Radio!</string>
+<string name="anon_warning">Sem a password as suas transmissões não serão divulgadas!</string>
+<string name="mininterval">Tempo mínimo de actualização - 1 minuto!</string>
+<string name="singlelog">Envio de posição</string>
+<string name="startlog">Iniciar seguimento.</string>
+<string name="stoplog">Parar seguimento.</string>
+
+<string name="empty_logview">Você ainda não enviou ou recebeu nenhum pacote. \ N \ n Pressione o \ "Menu \" botão para enviar um único pacote ou para começar a seguir a sua posição. \ N \ n Você também pode alterar as sua preferências a partir do menu.</string>
+
+<!-- Maps activity -->
+<string name="sta_lastreport">Última transmissão %s</string>
+<string name="map_track_call">Seguindo %s...</string>
+<string name="map_track_unknown">Posição para %s desconhecida</string>
+<string name="map_select">Seleccionar estação</string>
+
+<string name="map_loading">A carregar...</string>
+
+<!-- StationInfo activity -->
+<string name="sta_ssids">SSIDs da Estação</string>
+<string name="sta_history">Pacotes anteriores da Estação</string>
+<string name="sta_map">Mapa</string>
+<string name="sta_extmap">Mapa Externo</string>
+<string name="sta_aprsfi">pt.aprs.fi</string>
+<string name="sta_qrzcom">qrz.com</string>
+
+<!-- Conversations activity -->
+<string name="msg_send_new">Enviar mensagem para...</string>
+<string name="msg_message_text">Texto da mensagem</string>
+<string name="msg_empty_list">Não tem mensagens guardadas</string>
+<string name="msg_stored_offline">Esta mensagem será enviada quando inciar seguimento.</string>
+<!-- Message activity -->
+<string name="msg_from">Mensagem de %s</string>
+<string name="msg_to">Mensagem para %s</string>
+<string name="msg_abort">Abortar transmissão</string>
+<string name="msg_restart">Reiniciar transmissão</string>
+<string name="msg_type_rejected">rejeitado</string>
+<string name="msg_type_aborted">abortado</string>
+
+<!-- AprsService -->
+<string name="aprsservice">Serviço APRSdroid</string>
+<string name="service_once">Serviço APRS numa transmissão: %1$s, %2$s.</string>
+<string name="service_start">Serviço APRS começado: %1$s, %2$s.</string>
+<string name="service_stop">Serviço de APRS terminado.</string>
+<string name="service_no_location">Para o APRSdroid funcionar correctamente deve ligar o seu GPS ou verificar cobertura de rede.</string>
+<string name="service_sm_no_gps">O SmartBeaconing™ requer GPS!</string>
+<!-- service result codes -->
+<string name="post_error">Erro</string>
+<string name="post_incmg">recebido</string>
+<string name="post_info"/>
+<string name="post_connecting">Ligado a %1$s:%2$d...</string>
+<string name="post_reconnect">Ligação perdida. Religando dentro de %d segundos...</string>
+
+<!-- first run dialog -->
+<string name="fr_title">Bem-vindo ao APRSdroid!</string>
+<string name="fr_text">Este software é exclusivo para radioamadores licenciados!</string>
+<string name="fr_text2">Tem de colocar o seu indicativo para uso deste software, para enviar pacotes precisa de uma password de APRS-IS.</string>
+<string name="fr_text3">Only needed for APRS over the Internet:</string>
+
+<!-- about dialog -->
+
+<!-- map view -->
+<string name="map_overlays">Sobreposições</string>
+<string name="map_google">Google: Map</string>
+<string name="map_satellite">Google: Satellite</string>
+<string name="map_osm">OpenStreetMap.org</string>
+<!-- intended use is in map style menu: "file name of offline map (Offline)" -->
+<string name="map_offline"> %s (Offline)</string>
+<string name="map_objects">Objectos APRS</string>
+
+<!-- map view -->
+<string name="age">Ver ultimo</string>
+<string name="age_30">30 minutos</string>
+<string name="age_2h">2 horas</string>
+<string name="age_12h">12 horas</string>
+<string name="age_1d">1 dia</string>
+<string name="age_2d">2 dias</string>
+
+
+<!-- options menu -->
+<string name="about">Acerca</string>
+<string name="show_hub">Mostrar estações à volta da minha.</string>
+<string name="show_map">Mostrar mapa</string>
+<string name="show_log">Mostrar registo</string>
+<string name="export_log">Export Log</string>
+<string name="export_empty">Nothing to export</string>
+<string name="clear_log">Limpar o Registo</string>
+<string name="quit">Sair.</string>
+<string name="preferences">Preferências</string>
+<!-- preferences -->
+<string name="profile_load">Load profile...</string>
+<string name="profile_export">Export profile...</string>
+<string name="p__ham">Radioamador.</string>
+<string name="p_callsign">Indicativo</string>
+<string name="p_callsign_nossid">Callsign (sem SSID)</string>
+<string name="p_callsign_summary">O seu indicativo</string>
+<string name="p_callsign_entry">Escreva o seu indicativo</string>
+<string name="p_passcode">APRS-IS Password</string>
+<string name="p_passcode_summary">Palavra-passe do APRS-IS</string>
+<string name="p_passcode_entry">Escreva a sua palavra-passe</string>
+<string name="p_passreq">Peça palavra-passe</string>
+<string name="p_passreq_summary">Peça a palavra-passe online</string>
+<string name="p__aprs">Configurações APRS</string>
+<string name="p_ssid">SSID</string>
+<string name="p_ssid_summary">Tipo de estação (1..15; 9=Móvel, 10=APRS-IS)</string>
+<string name="p_ssid_entry">Escreva o SSID da sua estação</string>
+<!-- array of station types (SSID) -->
+<string-array name="p_ssid_e">
+	<item>(inexistente) Estação primária</item>
+	<item>1: Estação genérica adicional</item>
+	<item>2: Estação genérica adicional</item>
+	<item>3: Estação genérica adicional</item>
+	<item>4: Estação genérica adicional</item>
+	<item>5: Outra rede (Dstar, 3G)</item>
+	<item>6: Satélite</item>
+	<item>7: Portátil</item>
+	<item>8: Barco / navio</item>
+	<item>9: Estação móvel</item>
+	<item>10: APRS-IS (sem rádio)</item>
+	<item>11: Balão, Avião, Nave</item>
+	<item>12: APRStt, DTMF, ... (uma vez)</item>
+	<item>13: Estação metrológica</item>
+	<item>14: Veículo de carga</item>
+	<item>15: Estação genérica adicional</item>
+</string-array>
+<string name="p_symbol">Símbolo APRS</string>
+<string name="p_symbol_summary">O seu símbolo para o mapa</string>
+<string name="p_symbol_overlay">Sobreposição</string>
+<string name="p_symbol_result">Resultado:</string>
+<string name="p_frequency">Frequência voz</string>
+<string name="p_frequency_summary">A Frequência em voz [MHz]</string>
+<string name="p_status">Espaço para comentário</string>
+<string name="p_status_summary">O texto após as suas coordenadas</string>
+<string name="p_status_entry">Coloque o comentário da sua estação para enviar nos pacotes</string>
+<string name="p__connection">Ligação APRS</string>
+<string name="p_conntype">Protocolo de ligação</string>
+<string name="p_conntype_entry">Escolha o protocolo de ligação</string>
+<string name="p_link">Tipo de Ligação</string>
+<string name="p_link_entry">Escolha o tipo de ligação</string>
+<string name="p_connsetup">Preferências de Ligação</string>
+<string name="p_connlog">Registo de ligação</string>
+<string name="p_connlog_summary">Registo detalhado de saída no LOG</string>
+<!-- array of connection types -->
+<string name="p_conn_aprsis">Internet (APRS-IS)</string>
+<string name="p_conn_afsk">Áudio (AFSK)</string>
+<string name="p_conn_kiss">TNC (KISS)</string>
+<string name="p_conn_tnc2">TNC (plaintext TNC2)</string>
+<string name="p_conn_kwd">Kenwood (via NMEA)</string>
+<string name="p_conn_kwd_info">Ajuda configuração Kenwood</string>
+<string name="p_conn_kwd_gps">Use Android GPS</string>
+<string name="p_conn_kwd_gps_summary">Forward NMEA sentences to radio</string>
+<string name="p_conn_kwd_gps_debug">Display GPS in log</string>
+<string name="p_conn_kwd_gps_debug_summary">Show raw NMEA in APRSdroid</string>
+<!-- array of APRS-IS protocols -->
+<string name="p_aprsis_tcp">Ligação TCP</string>
+<string name="p_aprsis_http">HTTP POST (apenas envio)</string>
+<string name="p_aprsis_udp">UDP (apenas envio)</string>
+<!-- array of TNC link types -->
+<string name="p_link_bt">Bluetooth SPP (Perfil da porta série)</string>
+<string name="p_link_tcpip">TCP/IP</string>
+<string name="p_link_usb">Porta série USB</string>
+<!-- array of location sources -->
+<string name="p_source_manual">Posição manual</string>
+<string name="p_source_periodic">Posição periódica de GPS/Network</string>
+<string name="p_source_smart">Posição SmartBeaconing™</string>
+<!-- manual position -->
+<string name="p_source_lat">Latitude</string>
+<string name="p_source_lon">Longitude</string>
+<string name="p_source_coord">Coordenada</string>
+<!-- select your position from a map -->
+<string name="p_source_from_map">Choose on map</string>
+<string name="p_source_from_map_save">Save position</string>
+<string name="p_source_get_last">Use a última posição GPS</string>
+<string name="p_source_auto">Endereço automático</string>
+<string name="p_source_auto_summary">Realiza endereço periódico de posição</string>
+
+
+<!-- privacy settings -->
+<string name="p_privacy">Posição privada</string>
+<string name="p_privacy_summary">Posição ambígua e mais</string>
+<string name="p_priv_ambiguity">Posição ambígua</string>
+<string name="p_priv_ambiguity_summary">Precisão reduzida para o seu próprio reporte</string>
+<string name="p_ambiguity_off">Desligar (DD° MM.mm\')</string>
+<string name="p_ambiguity_ddmmm">1 (DD° MM.m\')</string>
+<string name="p_ambiguity_ddmm">2 (DD° MM\')</string>
+<string name="p_ambiguity_ddm">3 (DD° Mx\')</string>
+<string name="p_ambiguity_dd">4 (DD°)</string>
+<string name="p_priv_spdbear">Velocidade enviada &amp; Orientação</string>
+<string name="p_priv_spdbear_summary">Velocidade incluída e posição de reporte de posição</string>
+<string name="p_priv_altitude">Altitude enviada</string>
+<string name="p_priv_altitude_summary">Altitude incluída em reportes de posição</string>
+
+<!-- connection type properties -->
+<string name="p_host">Servidor</string>
+<string name="p_host_summary">Servidor APRS (porta 8080) para enviar os beacons</string>
+<string name="p_host_entry">Escreva o nome do servidor APRS-IS</string>
+<string name="p_host_hint">host:porta</string>
+<string name="p__position">Pacotes de posição</string>
+<string name="p_locsource">Fonte localizada</string>
+<string name="p_locsource_summary">Manual, periódica ou SmartBeaconing™</string>
+<string name="p__location">Configurações da localização</string>
+
+<string name="p_smartbeaconing">Copy text 	 SmartBeaconing™</string>
+<string name="p_sb_help">Ajuda do SmartBeaconing</string>
+<string name="p_sb_fast_speed">Velocidade rápida [km/h]</string>
+<string name="p_sb_fast_speed_summary">Velocidada mínima para actualizar posições rápidas</string>
+<string name="p_sb_fast_rate">Ritmo rápido [s]</string>
+<string name="p_sb_fast_rate_summary">Ritmo do beacon com velocidade rápida</string>
+<string name="p_sb_slow_speed">Velocidade lenta [km/h]</string>
+<string name="p_sb_slow_speed_summary">Velocidade máxima para actualizar posições lentas</string>
+<string name="p_sb_slow_rate">Ritmo lento [s]</string>
+<string name="p_sb_slow_rate_summary">Ritmo do beacon com velocidade lenta</string>
+<!-- corner pegging should not be translated -->
+<string name="p_corner_pegging">Rotina CornerPegging</string>
+<string name="p_cp_turn_time">Tempo de viragem mínimo</string>
+<string name="p_cp_turn_time_summary">Tempo mínimo de beacon quando mudar de direcção</string>
+<string name="p_cp_turn_angle">Ângulo de viragem mínimo [°]</string>
+<string name="p_cp_turn_angle_summary">Ângulo mínimo com velocidade alta</string>
+<string name="p_cp_turn_slope">Virar o slope</string>
+<string name="p_cp_turn_slope_summary">Influência da velocidade no ângulo mínimo</string>
+
+<string name="p_interval">Tempo mínimo de actualização</string>
+<string name="p_interval_summary">Minutos entre transmissões de beacon</string>
+<string name="p_interval_entry">Escreva o tempo entre actualizações [min]</string>
+<string name="p_distance">Distância mínima para actualização</string>
+<string name="p_distance_summary">Quilómetros a percorrer para a transmição do beacon (coloque 0 para ser utilizado o tempo)</string>
+<string name="p_distance_entry">Quilómetros a percorrer para actualização.</string>
+<string name="p_speedbrg">Aguarde velocidade &amp; direcção</string>
+<string name="p_speedbrg_summary">Mantenha o GPS ligado mais tempo para obter dados mais precisos</string>
+<string name="p_netloc">Use a localização da rede</string>
+<string name="p_netloc_summary">A determinar a sua posição a partir da rede de telemóvel.</string>
+<string name="p_gps">Precisão de GPS</string>
+<string name="p_gps_summary">Utilização de bateria vs. qualidade da posição</string>
+<string name="p_gps_entry">Escolha  a precisão do GPS</string>
+<!-- array of GPS precisions -->
+<string name="p_gps_always">ON (Sempre ligado)</string>
+<string name="p_gps_med">Médio</string>
+<string name="p_gps_low">Baixo</string>
+<string name="p_keepscreen">Manter ecrâ ligado</string>
+<string name="p_keepscreen_summary">Não desligue o ecrâ quando o APRSdroid está em funcionamento</string>
+
+<!-- messaging -->
+<string name="p__display">Mostrar e notificações</string>
+<string name="p__notification">Notificações</string>
+<string name="p__notification_summary">Alerta para mensagens e reportes de posição</string>
+<string name="p_msg">Mensagens recebidas</string>
+<string name="p_msg_led">Led PIsca-Pisca</string>
+<string name="p_msg_led_on">Notificações de LED ligadas</string>
+<string name="p_msg_led_off">Notificações de LED desligadas</string>
+<string name="p_msg_vibr">Vibração</string>
+<string name="p_msg_vibr_on">Notificações por vibração estão ligadas</string>
+<string name="p_msg_vibr_off">Notificações por vibração estão desligadas</string>
+<string name="p_msg_ring">Tom de chamada</string>
+<string name="p_msg_ring_summary">Tom para mensagens de entrada</string>
+<string name="p_pos">O próprio reporte de posição</string>
+<string name="p_pos_ring">Tom de chamada</string>
+<string name="p_pos_ring_summary">Tonalidade para envio de reportes de posição</string>
+<string name="p_dgp">Proprias transmissoes retransmitidas</string>
+<string name="p_dgp_ring">Tom de chamada</string>
+<string name="p_dgp_ring_summary">Tones para transmissoes retransmitidas</string>
+
+<string name="got_digipeated">Retransmitidas por %1$s: %2$s</string>
+<string name="status_linkoff">Error: %s</string>
+<string name="status_linkon">Connected: %s</string>
+
+<!-- AFSK settings -->
+<string name="p_aprs_path">Caminho do digi APRS</string>
+<string name="p_aprs_path_hint">salto1, salto 2, ...</string>
+<string name="p_aprs_path_summary">Sequência dos digipeaters</string>
+<string name="p_aprs_path_entry">Coloque o caminho(digi patch) separado por virgulas</string>
+<string name="p_afsk_prefix">Sincronização de prefixo</string>
+<string name="p_afsk_prefix_summary">Sem operador predefinido (Ex: para VOX controlo)</string>
+<string name="p_afsk_prefix_entry">Coloque o tempo predefenido  [ms]</string>
+<string name="p_afsk_hqdemod">Detector de alta qualidade</string>
+<string name="p_afsk_hqdemod_summary">javAX25lib: requer CPU de 800 MHz</string>
+<string name="p_afsk_btsco">Auricular bluetooth</string>
+<string name="p_afsk_btsco_summary">Use um auricular bluetooth para o AFSK</string>
+<string name="p_afsk_output">Saída de audio</string>
+<string-array name="p_afsk_out_e">
+	<item>Chamada de voz</item>
+	<item>Tom de chamada</item>
+	<item>Música</item>
+	<item>Alarme</item>
+</string-array>
+
+<!-- TCP server settings -->
+<string name="p_tcp_server_summary">APRS-IS TCP server (port 14580) para contacto</string>
+<string name="p_filterdist">Raio de recepção</string>
+<string name="p_filterdist_summary">A receber pacotes de estações neste raio</string>
+<string name="p_filterdist_entry">Raio, a partir da sua estação, para monitorizar packet [Km]</string>
+<string name="p_filter">Filtro de packet</string>
+<string name="p_filter_hint">b/Colega o/Objecto</string>
+<string name="p_filter_summary">Filtro para mensagens de entrada</string>
+<string name="p_filter_entry">Fazer um filtro para packets recebidos</string>
+
+<string name="p_filterhelp">Ajuda do filtro de mensagens</string>
+<string name="p_filterhelp_summary">Ajuda online para filtros APRS-IS</string>
+
+<string name="p_sotimeout">Tempo limite para ligação TCP</string>
+<string name="p_sotimeout_summary">Tempo antes de fazer reset a ligação</string>
+<string name="p_sotimeout_entry">Tempo maximo em segundos (0 = desligado)</string>
+
+<string name="p_mapfile">Map file name</string>
+<string name="p_mapfile_summary">MapsForge map file for APRSdroid</string>
+<string name="p_mapfile_choose">Choose map file</string>
+<string name="mapfile_error">Error loading map file %s!</string>
+
+<string name="p_themefile">Theme file name</string>
+<string name="p_themefile_summary">MapsForge rendering theme (XML)</string>
+<string name="p_themefile_choose">Choose theme file</string>
+<string name="themefile_error">Error loading theme file %s!</string>
+
+<string name="kbdnav_title">Keyboard Navigation</string>
+<!-- keyboard navigation info -->
+<string-array name="kbdnav_lines">
+	<item>move map</item>
+	<item>zoom</item>
+	<item>menu</item>
+	<item>select</item>
+</string-array>
+
+  David Quental https://launchpad.net/~ct1drb
+  David Quental https://launchpad.net/~ct1drb-1
+  Georg Lukas https://launchpad.net/~ge0rg
+  Henrique Martins https://launchpad.net/~ct2kea
+  Jon Amil https://launchpad.net/~amilgz
+  Jorge Santos https://launchpad.net/~ct1jib
+  Jose Carlos Moreira https://launchpad.net/~ct1dhm
+  Paulo Mendes https://launchpad.net/~ct2hqt
+
+<!-- Bluetooth TNC settings -->
+<string name="p_bt_client">Modo cliente (com virtual)</string>
+<string name="p_bt_client_summary">APRSdroid estabelece a ligação (mantenha-se ligado)</string>
+<string name="p_bt_tnc_device">Dispositivo TNC Blluetooth</string>
+<string name="p_bt_tnc_device_summary">Escolha o seu TNC de dispositivos emparelhados</string>
+<string name="p_bt_tnc_device_entry">Escolha dispositivo</string>
+<string name="p_bt_channel">Canal</string>
+<string name="p_bt_channel_summary">Canal bluetooth ligado ao TNC</string>
+<string name="p_bt_channel_entry">Coloque canal (o mais usual: "1"; nada para SPP)</string>
+
+<string name="p_tnc_init">Cadeia de inicialização do TNC</string>
+<string name="p_tnc_init_summary">Comandos de inicialização para o TNC (URL-encoded, Esc=%%1B, "%%"=%%25)</string>
+<string name="p_tnc_init_msg" formatted="false">A string da URL-encoded (Esc=%1B, \"%\"=%25), atraso depois de cada linha:</string>
+
+<string name="p_tnc_delay">Atraso da inicialização do TNC</string>
+<string name="p_tnc_delay_summary">Tempo de espera depois de cada linha</string>
+<string name="p_tnc_delay_entry">Atraso de inicialização do TNC [ms]</string>
+
+<string name="p_bt_prefs">Definições do bluetooth</string>
+<string name="p_bt_prefs_summary">Lige bluetoooth nos dois disositivso</string>
+
+<string name="bt_error_unsupported">O bluetooth não é suportado!</string>
+<string name="bt_error_disabled">Por favor active o bluetooth</string>
+<string name="bt_error_no_tnc">Por favor configure o TNC bluetooth</string>
+<string name="bt_error_connect">Could not connect to %s! Please turn on the device and close other Bluetooth connections.</string>
+<string name="bt_awaiting">Awaiting client…</string>
+<string name="bt_client_connected">Client %s connected.</string>
+<string name="bt_connecting_to_spp">Connecting to SPP service on %s…</string>
+<!-- connecting to [device name] channel [bluetooth channel id] -->
+<string name="bt_connecting_to_channel">Connecting to %s channel %d…</string>
+<string name="bt_connected">Connected to TNC.</string>
+<string name="bt_reconnecting">Reconnecting in 3s…</string>
+
+
+<string name="afsk_info_sco_req">A pedir ligação do SCO bluetooth...</string>
+<string name="afsk_info_sco_est">Ligação do SCO bluetooth estabelecida.</string>
+
+<!-- TCP/IP TNC settings -->
+<string name="p_tcptnc_server_summary">Contactar o servidor do TNC TCP/IP</string>
+<string name="p_tcptnc_entry">Escrever o servidor do KISS</string>
+
+<!-- SSL strings -->
+<string name="ssl_import_activity">Importar certificado SSL</string>
+<string name="ssl_import_password">Por favor escreva a password do certificado importado:</string>
+<string name="ssl_no_keyfile">Nenhum certificado para %s! A usar a password de autenticação.</string>
+<string name="ssl_import_ok">Certificado importado para %s.</string>
+<string name="ssl_import_error">Erro na importacao do certificado: %s!</string>
+<string name="ssl_expired">O seu certificado expirou!</string>
+<string name="ssl_expire_in">O seu certificado expirará em %d dias!</string>
+
+<!-- Config import -->
+<string name="profile_import_activity">Profile import</string>
+<string name="profile_import_done">Imported profile: %s</string>
+<string name="profile_import_error">Error importing profile: %s!</string>
+
+<!-- (USB) Serial TNC settings -->
+<string name="p_serial_baudrate">Baud Rate</string>
+<string name="p_serial_baudrate_summary">O baud rate da porta série</string>
+<!-- (USB) Serial Errors -->
+<string name="p_serial_unsupported">Porta série não suportada!</string>
+<string name="p_serial_noperm">Não há permissão para a porta USB!</string>
+<string name="p_serial_notfound">Nenhuma porta USB encontrada!</string>
+
+<string name="no_perm_text">The following permissions are required:</string>
+</resources>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="p_conntype_e">
+		<item>@string/p_conn_aprsis</item>
+		<item>@string/p_conn_afsk</item>
+		<item>@string/p_conn_kiss</item>
+		<item>@string/p_conn_tnc2</item>
+		<item>@string/p_conn_kwd</item>
+	</string-array>
+	<string-array name="p_conntype_ev">
+		<item>aprsis</item>
+		<item>afsk</item>
+		<item>kiss</item>
+		<item>tnc2</item>
+		<item>kenwood</item>
+	</string-array>
+	<string-array name="p_aprsis_e">
+		<item>@string/p_aprsis_tcp</item>
+		<item>@string/p_aprsis_http</item>
+		<item>@string/p_aprsis_udp</item>
+	</string-array>
+	<string-array name="p_aprsis_ev">
+		<item>tcp</item>
+		<item>http</item>
+		<item>udp</item>
+	</string-array>
+	<string-array name="p_link_e">
+		<item>@string/p_link_bt</item>
+		<item>@string/p_link_ble</item>
+		<item>@string/p_link_usb</item>
+		<item>@string/p_link_tcpip</item>
+	</string-array>
+	<string-array name="p_link_ev">
+		<item>bluetooth</item>
+		<item>ble</item>
+		<item>usb</item>
+		<item>tcpip</item>
+	</string-array>
+	<string-array name="p_afsk_e">
+		<item>@string/p_afsk_vox</item>
+		<item>@string/p_afsk_digirig</item>
+	</string-array>
+	<string-array name="p_afsk_ev">
+		<item>vox</item>
+		<item>digirig</item>
+	</string-array>	
+	<string-array name="p_afsk_out_ev">
+		<item>0</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+	</string-array>
+
+	<string-array name="p_locsource_e">
+		<item>@string/p_source_smart</item>
+		<item>@string/p_source_periodic</item>
+		<item>@string/p_source_manual</item>
+	</string-array>
+	<string-array name="p_locsource_ev">
+		<item>smartbeaconing</item>
+		<item>periodic</item>
+		<item>manual</item>
+	</string-array>
+
+	<string-array name="p_gps_e">
+		<item>@string/p_gps_always</item>
+		<item>@string/p_gps_med</item>
+		<item>@string/p_gps_low</item>
+	</string-array>
+	<string-array name="p_gps_ev">
+		<item>always</item>
+		<item>med</item>
+		<item>low</item>
+	</string-array>
+
+	<string-array name="p_ambiguity_e">
+		<item>@string/p_ambiguity_off</item>
+		<item>@string/p_ambiguity_ddmmm</item>
+		<item>@string/p_ambiguity_ddmm</item>
+		<item>@string/p_ambiguity_ddm</item>
+		<item>@string/p_ambiguity_dd</item>
+	</string-array>
+	<string-array name="p_ambiguity_ev">
+		<item>0</item>
+		<item>4</item>
+		<item>3</item>
+		<item>2</item>
+		<item>1</item>
+	</string-array>
+
+	<string-array name="p_ssid_ev">
+		<item></item> <item>1</item> <item>2</item> <item>3</item>
+		<item>4</item> <item>5</item> <item>6</item> <item>7</item>
+		<item>8</item> <item>9</item> <item>10</item> <item>11</item>
+		<item>12</item> <item>13</item> <item>14</item> <item>15</item>
+	</string-array>
+
+	<string-array name="p_units_ev">
+		<item>1</item> <item>2</item>
+	</string-array>
+
+	<string-array name="ages">
+		<item>@string/age_30</item>
+		<item>@string/age_2h</item>
+		<item>@string/age_12h</item>
+		<item>@string/age_1d</item>
+		<item>@string/age_2d</item>
+	</string-array>
+	<string-array name="age_minutes">
+		<item>30</item>
+		<item>120</item>
+		<item>720</item>
+		<item>1440</item>
+		<item>2880</item>
+	</string-array>
+	<string-array name="p_serial_baudrates">
+		<item>4800</item>
+		<item>9600</item>
+		<item>19200</item>
+		<item>38400</item>
+		<item>57600</item>
+		<item>115200</item>
+		<item>230400</item>
+		<item>460800</item>
+		<item>921600</item>
+	</string-array>
+    <string-array name="compressed_mice_status">
+        <item>Off Duty</item>
+        <item>En Route</item>
+        <item>In Service</item>
+        <item>Returning</item>
+        <item>Committed</item>
+        <item>Special</item>
+        <item>Priority</item>
+        <item>EMERGENCY!</item>
+	</string-array>			
+</resources>

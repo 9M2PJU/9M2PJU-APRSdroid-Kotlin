@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- APRSdroid strings.xml - this file contains strings which need to be translated -->
+<resources>
+<string name="app_name">APRSdroid 9M2PJU</string>
+<string name="app_prefs">APRSdroid：設定</string>
+<string name="app_map">APRSdroid：地図</string>
+<string name="app_hub">APRSdroid：局一覧</string>
+<string name="app_log">APRSdroid ログ</string>
+<string name="app_sta">局情報</string>
+<string name="app_messages">メッセージ</string>
+<string name="app_messages_clear">メッセージ消去</string>
+<!-- APRSdroid activity -->
+<string name="firstrun">APRSdroidの使用前にコールサインとパスコードの設定が必要です</string>
+<string name="wrongpasscode">コールサインとパスコードが一致しません</string>
+<string name="e_toolong_callsign">Your callsign is too long for Packet Radio!</string>
+<string name="anon_warning">パスコードを入力しないと位置情報は送信されません</string>
+<string name="mininterval">GPS測位間隔は１分以下に設定できません</string>
+<string name="singlelog">位置送信</string>
+<string name="startlog">連続送信開始</string>
+<string name="stoplog">送信停止</string>
+
+<string name="empty_logview">まだ位置情報を送受信していません。\n\n \"メニュー\"ボタンを押した後、「１回のみ送信」もしくは「連続送信開始」を選び位置情報を送信してください。\n\nまた、メニューより設定の変更が可能です。</string>
+
+<!-- Maps activity -->
+<string name="sta_lastreport">%s 最終受信情報</string>
+<string name="map_track_call">%sを追跡...</string>
+<string name="map_track_unknown">%s の位置は不明!</string>
+<string name="map_select">局 選択</string>
+
+<string name="map_loading">読み込み中...</string>
+
+<!-- StationInfo activity -->
+<string name="sta_ssids">局 SSID</string>
+<string name="sta_history">局 受信情報履歴</string>
+<string name="sta_map">地図表示</string>
+<string name="sta_extmap">外部マップ</string>
+<string name="sta_aprsfi">aprs.fiで表示</string>
+<string name="sta_qrzcom">QRZ.com接続</string>
+
+<!-- Conversations activity -->
+<string name="msg_send_new">メッセージ送信</string>
+<string name="msg_message_text">内容</string>
+<string name="msg_empty_list">まだ格納された会話はありません。</string>
+<string name="msg_stored_offline">あなたがトラッキングを始めると、メッセージが送信されます。</string>
+<!-- Message activity -->
+<string name="msg_from">%s からのメッセージ</string>
+<string name="msg_to">%s さんへ送信</string>
+<string name="msg_abort">送信中止</string>
+<string name="msg_restart">送信再開</string>
+<string name="msg_type_rejected">拒否された</string>
+<string name="msg_type_aborted">不達</string>
+
+<!-- AprsService -->
+<string name="aprsservice">APRSdroidサービス</string>
+<string name="service_once">APRSサービス１回のみ送信: %1$s, %2$s.</string>
+<string name="service_start">APRSサービス開始: %1$s, %2$s.</string>
+<string name="service_stop">APRSサービス停止</string>
+<string name="service_no_location">GPS又はネットワーク・ロケーションの何れかの動作を可能にする必要があります!</string>
+<string name="service_sm_no_gps">SmartBeaconing™GPS!要求</string>
+<!-- service result codes -->
+<string name="post_error">エラー</string>
+<string name="post_incmg">受信</string>
+<string name="post_info"/>
+<string name="post_connecting">接続中 %1$s:%2$d...</string>
+<string name="post_reconnect">接続を失いました。 %d 秒後に再接続を試みます...</string>
+
+<!-- first run dialog -->
+<string name="fr_title">ようこそAPRSdroidへ！</string>
+<string name="fr_text">このソフトは免許のあるアマチュア無線局のみ使用可能です。</string>
+<string name="fr_text2">このソフトを使用するにはコールサインの入力が必要です。また、位置情報を送信するにはAPRS-ISパスコードも必要です。</string>
+<string name="fr_text3">Only needed for APRS over the Internet:</string>
+
+<!-- about dialog -->
+
+<!-- map view -->
+<string name="map_overlays">オーバーレイ</string>
+<string name="map_google">Google: Map</string>
+<string name="map_satellite">Google: Satellite</string>
+<string name="map_osm">OpenStreetMap.org</string>
+<!-- intended use is in map style menu: "file name of offline map (Offline)" -->
+<string name="map_offline"> %s (Offline)</string>
+<string name="map_objects">APRS オブジェクト</string>
+
+<!-- map view -->
+<string name="age">情報表示期間</string>
+<string name="age_30">30 分</string>
+<string name="age_2h">2時間</string>
+<string name="age_12h">12時間</string>
+<string name="age_1d">1日</string>
+<string name="age_2d">2日</string>
+
+
+<!-- options menu -->
+<string name="about">ソフトウェア情報</string>
+<string name="show_hub">受信局一覧</string>
+<string name="show_map">地図</string>
+<string name="show_log">ログ</string>
+<string name="export_log">ログ出力</string>
+<string name="export_empty">出力するログがありません</string>
+<string name="clear_log">ログ消去</string>
+<string name="quit">終了</string>
+<string name="preferences">設定</string>
+<!-- preferences -->
+<string name="profile_load">Load profile...</string>
+<string name="profile_export">Export profile...</string>
+<string name="p__ham">無線局情報設定</string>
+<string name="p_callsign">コールサイン</string>
+<string name="p_callsign_nossid">コールサイン (SSID抜き)</string>
+<string name="p_callsign_summary">利用者のアマチュア無線局コールサイン</string>
+<string name="p_callsign_entry">コールサインを入力</string>
+<string name="p_passcode">APRS-ISパスコード</string>
+<string name="p_passcode_summary">APRS-IS認証パスコード</string>
+<string name="p_passcode_entry">パスコードを入力</string>
+<string name="p_passreq">パスコード申請</string>
+<string name="p_passreq_summary">APRS-ISパスコード発行サイトへ接続</string>
+<string name="p__aprs">APRS設定</string>
+<string name="p_ssid">SSID</string>
+<string name="p_ssid_summary">局の種別 (1..15; 9=モービル局, 10=APRS-IS)</string>
+<string name="p_ssid_entry">SSIDを選択</string>
+<!-- array of station types (SSID) -->
+<string-array name="p_ssid_e">
+	<item>無し: 主局・固定（常置場所）局</item>
+	<item>1: 1200bpsの挟中域デジピータ・固定局</item>
+	<item>2: 9600bpsのデジピータ・固定局</item>
+	<item>3: 1200bpsの広域デジピータ・固定局</item>
+	<item>4: HFゲートウェイ局,固定（常置場所）局</item>
+	<item>5:携帯機器（スマホ,D-Star, その他回線等)</item>
+	<item>6: 衛星・イベント局・キャンプ中</item>
+	<item>7: ハンディー機</item>
+	<item>8: ボード/船</item>
+	<item>9: モービル</item>
+	<item>10: インターネット接続局 （I-Gate局等）</item>
+	<item>11: 気球・航空機・宇宙船等</item>
+	<item>12:一方的送信なトラッカー機器等</item>
+	<item>13: 気象局</item>
+	<item>14: 貨物トラック移動局</item>
+	<item>15: 固定（常置場所）局・移動局・気象局</item>
+</string-array>
+<string name="p_symbol">APRSシンボル</string>
+<string name="p_symbol_summary">地図上に表示するシンボル</string>
+<string name="p_symbol_overlay">オーバーレイ:</string>
+<string name="p_symbol_result">結果:</string>
+<string name="p_frequency">音声周波数</string>
+<string name="p_frequency_summary">貴局の音声交信周波数 [MHz]</string>
+<string name="p_status">送信コメント文</string>
+<string name="p_status_summary">位置情報と共に送信するメッセージ</string>
+<string name="p_status_entry">ビーコンコメントを入力</string>
+<string name="p__connection">APRS接続設定</string>
+<string name="p_conntype">通信方式</string>
+<string name="p_conntype_entry">通信方式を選択</string>
+<string name="p_link">接続タイプ</string>
+<string name="p_link_entry">接続タイプを選択</string>
+<string name="p_connsetup">接続詳細設定</string>
+<string name="p_connlog">接続情報を記録</string>
+<string name="p_connlog_summary">冗長状態をログに出力する(デバック)</string>
+<!-- array of connection types -->
+<string name="p_conn_aprsis">インターネット (APRS-IS)</string>
+<string name="p_conn_afsk">音信号 (AFSK)</string>
+<string name="p_conn_kiss">TNC (KISS)</string>
+<string name="p_conn_tnc2">TNC (プレインテキストTNC2)</string>
+<string name="p_conn_kwd">KENWOOD (NMEA waypoint)</string>
+<string name="p_conn_kwd_info">KENWOOD 設定ヘルプ</string>
+<string name="p_conn_kwd_gps">Androidの GPS を使う</string>
+<string name="p_conn_kwd_gps_summary">旧NMEA 文 をRFへ</string>
+<string name="p_conn_kwd_gps_debug">ログにGPS情報を表示</string>
+<string name="p_conn_kwd_gps_debug_summary">raw NMEA 表示</string>
+<!-- array of APRS-IS protocols -->
+<string name="p_aprsis_tcp">TCP接続</string>
+<string name="p_aprsis_http">HTTP POST (送信のみ）</string>
+<string name="p_aprsis_udp">UDP (送信のみ）</string>
+<!-- array of TNC link types -->
+<string name="p_link_bt">Bluetooth SPP</string>
+<string name="p_link_tcpip">TCP/IP</string>
+<string name="p_link_usb">USB シリアル</string>
+<!-- array of location sources -->
+<string name="p_source_manual">手動位置設定</string>
+<string name="p_source_periodic">周期的に GPS/ネットワーク で測位</string>
+<string name="p_source_smart">SmartBeaconing™測位</string>
+<!-- manual position -->
+<string name="p_source_lat">緯度</string>
+<string name="p_source_lon">経度</string>
+<string name="p_source_coord">座標</string>
+<!-- select your position from a map -->
+<string name="p_source_from_map">Choose on map</string>
+<string name="p_source_from_map_save">Save position</string>
+<string name="p_source_get_last">最後のGPS位置を使用</string>
+<string name="p_source_auto">自動位置情報取得・送信</string>
+<string name="p_source_auto_summary">周期的な位置取得(送信)をします。</string>
+
+
+<!-- privacy settings -->
+<string name="p_privacy">位置プライバシー</string>
+<string name="p_privacy_summary">位置を曖昧にする設定</string>
+<string name="p_priv_ambiguity">位置を曖昧に</string>
+<string name="p_priv_ambiguity_summary">減少精度させた独自ポジションレポート</string>
+<string name="p_ambiguity_off">Off (度度° 分分.mm\')形式</string>
+<string name="p_ambiguity_ddmmm">1 (度度° 分分.m\')</string>
+<string name="p_ambiguity_ddmm">2 (度度° 分分\')</string>
+<string name="p_ambiguity_ddm">3 (度度° 分x\')</string>
+<string name="p_ambiguity_dd">4 (度度°)</string>
+<string name="p_priv_spdbear">速度&amp;進路を含める</string>
+<string name="p_priv_spdbear_summary">位置情報に速度&amp;進路を含めます</string>
+<string name="p_priv_altitude">高度を含める</string>
+<string name="p_priv_altitude_summary">位置情報に高度を含めます</string>
+
+<!-- connection type properties -->
+<string name="p_host">接続先サーバ名</string>
+<string name="p_host_summary">ビーコン情報を送信するAPRS-ISサーバ名（デフォルトポート:8080）</string>
+<string name="p_host_entry">APRS-ISサーバホスト名を入力</string>
+<string name="p_host_hint">ホスト名:ポート番号</string>
+<string name="p__position">レポート内容設定</string>
+<string name="p_locsource">測位方法の選択</string>
+<string name="p_locsource_summary">固定,周期的 又は SmartBeaconing™</string>
+<string name="p__location">位置情報設定</string>
+
+<string name="p_smartbeaconing">SmartBeaconing™</string>
+<string name="p_sb_help">SmartBeaconing™ヘルプ</string>
+<string name="p_sb_fast_speed">速い速度 [km/h]</string>
+<string name="p_sb_fast_speed_summary">低速時に早く位置を更新</string>
+<string name="p_sb_fast_rate">速いレート [秒]</string>
+<string name="p_sb_fast_rate_summary">高速時のビーコン間隔</string>
+<string name="p_sb_slow_speed">遅い速度 [km/h]</string>
+<string name="p_sb_slow_speed_summary">最高速度の時は遅く位置情報を更新</string>
+<string name="p_sb_slow_rate">遅いレート [秒]</string>
+<string name="p_sb_slow_rate_summary">低速時のビーコン間隔</string>
+<!-- corner pegging should not be translated -->
+<string name="p_corner_pegging">カーブでビーコン</string>
+<string name="p_cp_turn_time">最少回転時間 [秒]</string>
+<string name="p_cp_turn_time_summary">方向変化でビーコン発信する場合の最小間隔</string>
+<string name="p_cp_turn_angle">最少回転角度 [°]</string>
+<string name="p_cp_turn_angle_summary">高速時の最小角度</string>
+<string name="p_cp_turn_slope">回転角度 (初期値:255)</string>
+<string name="p_cp_turn_slope_summary">最小角度は速度に影響</string>
+
+<string name="p_interval">位置情報取得間隔</string>
+<string name="p_interval_summary">GPSから位置情報を取得する間隔</string>
+<string name="p_interval_entry">取得する間隔[分]を入力</string>
+<string name="p_distance">ビーコン送信距離間隔</string>
+<string name="p_distance_summary">前回送信からこの距離以上移動したらビーコン送信（0で測位を行うごとに毎回送信）</string>
+<string name="p_distance_entry">送信する距離間隔[km]を入力</string>
+<string name="p_speedbrg">速度・進路を取得</string>
+<string name="p_speedbrg_summary">位置情報取得の時間が長くなります</string>
+<string name="p_netloc">基地局位置情報の使用</string>
+<string name="p_netloc_summary">携帯電話網の基地局位置情報（誤差大）を使用します</string>
+<string name="p_gps">GPS測位精度</string>
+<string name="p_gps_summary">精度を上げると電池の持ちが悪くなります</string>
+<string name="p_gps_entry">GPS測位精度</string>
+<!-- array of GPS precisions -->
+<string name="p_gps_always">高精度（常に測位）</string>
+<string name="p_gps_med">中精度</string>
+<string name="p_gps_low">低精度</string>
+<string name="p_keepscreen">画面消灯しない</string>
+<string name="p_keepscreen_summary">APRSdroid画面が表示中の場合、画面をオフにしません。</string>
+
+<!-- messaging -->
+<string name="p__display">画面と通知</string>
+<string name="p__notification">通知の設定</string>
+<string name="p__notification_summary">メッセージと位置のアラート</string>
+<string name="p_msg">メッセージ受信時</string>
+<string name="p_msg_led">LED点滅</string>
+<string name="p_msg_led_on">LED通知ON</string>
+<string name="p_msg_led_off">LED通知OFF</string>
+<string name="p_msg_vibr">バイブレーション(振動)</string>
+<string name="p_msg_vibr_on">バイブレーションON</string>
+<string name="p_msg_vibr_off">バイブレーションOFF</string>
+<string name="p_msg_ring">着信音</string>
+<string name="p_msg_ring_summary">メッセージ受信時の着信音を選択</string>
+<string name="p_pos">位置ビーコン発信時</string>
+<string name="p_pos_ring">着信音</string>
+<string name="p_pos_ring_summary">ビーコン発信時の音を選択</string>
+<string name="p_dgp">自パケットがデジピートされた時</string>
+<string name="p_dgp_ring">着信音</string>
+<string name="p_dgp_ring_summary">デジピートされた時の音を選択</string>
+
+<string name="got_digipeated">%1$s でデジピートされました: %2$s</string>
+<string name="status_linkoff">エラー: %s</string>
+<string name="status_linkon">接続中: %s</string>
+
+<!-- AFSK settings -->
+<string name="p_aprs_path">APRSデジピートパス</string>
+<string name="p_aprs_path_hint">ホップ1, ホップ2, ...</string>
+<string name="p_aprs_path_summary">デジピーター経路の設定</string>
+<string name="p_aprs_path_entry">デジピートパスをカンマ区切りで入力</string>
+<string name="p_afsk_prefix">フレーム同期送信時間</string>
+<string name="p_afsk_prefix_summary">データの前に付加する同期信号の送信時間（VOX制御など頭切れの防止）</string>
+<string name="p_afsk_prefix_entry">同期信号送信時間[ミリ秒]</string>
+<string name="p_afsk_hqdemod">高品質復調</string>
+<string name="p_afsk_hqdemod_summary">javAX25lib：800 MHz以上のCPU必須</string>
+<string name="p_afsk_btsco">Bluetoothヘッドセット</string>
+<string name="p_afsk_btsco_summary">Bluetooth(SCO)ﾍｯﾄﾞｾｯﾄをAFSK出力に使用</string>
+<string name="p_afsk_output">信号出力先選択</string>
+<string-array name="p_afsk_out_e">
+	<item>受話器</item>
+	<item>着信音</item>
+	<item>音楽用出力先</item>
+	<item>アラーム用出力先</item>
+</string-array>
+
+<!-- TCP server settings -->
+<string name="p_tcp_server_summary">接続するAPRS-IS TCPサーバ名(デフォルトポート:14580)</string>
+<string name="p_filterdist">近隣局ビーコン表示範囲</string>
+<string name="p_filterdist_summary">ここで指定した範囲内にある局のビーコンを受信表示する</string>
+<string name="p_filterdist_entry">ビーコンを受信する範囲[km]を指定</string>
+<string name="p_filter">パケットフィルター</string>
+<string name="p_filter_hint">b/仲間 o/オブジェクト ...</string>
+<string name="p_filter_summary">受信パケットをフィルタリングする</string>
+<string name="p_filter_entry">受信パケットのフィルター設定</string>
+
+<string name="p_filterhelp">メッセージフィルタ 説明</string>
+<string name="p_filterhelp_summary">APRS-ISフィルタの説明サイトへ接続</string>
+
+<string name="p_sotimeout">TCPソケット タイムアウト</string>
+<string name="p_sotimeout_summary">接続をタイムアウトするまでの時間</string>
+<string name="p_sotimeout_entry">タイムアウト時間[秒]を入力 (0でタイムアウトしない）</string>
+
+<string name="p_mapfile">地図ファイル名</string>
+<string name="p_mapfile_summary">MapsForge地図ファイル for APRSdroid</string>
+<string name="p_mapfile_choose">地図ファイル選択</string>
+<string name="mapfile_error">地図読込エラー %s!</string>
+
+<string name="p_themefile">テーマファイル名</string>
+<string name="p_themefile_summary">MapsForgeレンダリングテーマ(XML)</string>
+<string name="p_themefile_choose">テーマファイル選択</string>
+<string name="themefile_error">テーマファイル読込エラー %s!</string>
+
+<string name="kbdnav_title">Keyboard Navigation</string>
+<!-- keyboard navigation info -->
+<string-array name="kbdnav_lines">
+	<item>move map</item>
+	<item>zoom</item>
+	<item>menu</item>
+	<item>select</item>
+</string-array>
+
+  Georg Lukas https://launchpad.net/~ge0rg
+  Yoshihisa Tanda https://launchpad.net/~jn4oqt
+
+<!-- Bluetooth TNC settings -->
+<string name="p_bt_client">クライアント(子機)モード</string>
+<string name="p_bt_client_summary">APRSdroidは接続確立状態を維持する。</string>
+<string name="p_bt_tnc_device">BT-TNCデバイス選択</string>
+<string name="p_bt_tnc_device_summary">Bluetooth TNCデバイスを選択</string>
+<string name="p_bt_tnc_device_entry">デバイスを選択して下さい。</string>
+<string name="p_bt_channel">チャンネル選択</string>
+<string name="p_bt_channel_summary">Bluetooth信号チャンネルを選択</string>
+<string name="p_bt_channel_entry">チャンネルを入力(普通は:"1"; SPPは空)</string>
+
+<string name="p_tnc_init">TNC初期化設定</string>
+<string name="p_tnc_init_summary">初期設定コマンド for TNC (URL-encoded, Esc=%%1B, "%%"=%%25)</string>
+<string name="p_tnc_init_msg" formatted="false">URLエンコード (Esc=%1B, \"%\"=%25) :</string>
+
+<string name="p_tnc_delay">TNC初期化遅れ</string>
+<string name="p_tnc_delay_summary">各ラインの待ち時間</string>
+<string name="p_tnc_delay_entry">TNC初期化遅れ[ミリ秒]</string>
+
+<string name="p_bt_prefs">Bluetooth設定</string>
+<string name="p_bt_prefs_summary">有効なBluetoothペア機器</string>
+
+<string name="bt_error_unsupported">Bluetoothはサポートされていません!</string>
+<string name="bt_error_disabled">Bluetoothを有効にしてください!</string>
+<string name="bt_error_no_tnc">Bluetooth-TNCの設定をして下さい!</string>
+<string name="bt_error_connect">%s と接続できません。機器をオンにして、他Bluetooth接続を切断して下さい。</string>
+<string name="bt_awaiting">Awaiting client…</string>
+<string name="bt_client_connected">Client %s connected.</string>
+<string name="bt_connecting_to_spp">Connecting to SPP service on %s…</string>
+<!-- connecting to [device name] channel [bluetooth channel id] -->
+<string name="bt_connecting_to_channel">Connecting to %s channel %d…</string>
+<string name="bt_connected">Connected to TNC.</string>
+<string name="bt_reconnecting">Reconnecting in 3s…</string>
+
+
+<string name="afsk_info_sco_req">Bluetooth(SCO)リンク要求</string>
+<string name="afsk_info_sco_est">Bluetooth(SCO)リンク確立</string>
+
+<!-- TCP/IP TNC settings -->
+<string name="p_tcptnc_server_summary">KISS TCP サーバー接続先</string>
+<string name="p_tcptnc_entry">KISSサーバーホスト名</string>
+
+<!-- SSL strings -->
+<string name="ssl_import_activity">SSL証明書をインポート</string>
+<string name="ssl_import_password">証明書パスワードを入力:</string>
+<string name="ssl_no_keyfile">%s! 無証明 / パスコード認証使用</string>
+<string name="ssl_import_ok">%s 証明書を読込完了。</string>
+<string name="ssl_import_error">証明書読込エラー: %s!</string>
+<string name="ssl_expired">証明書の有効期限が終了しています!</string>
+<string name="ssl_expire_in">あなたの証明書はあと %d日で終了します!</string>
+
+<!-- Config import -->
+<string name="profile_import_activity">Profile import</string>
+<string name="profile_import_done">Imported profile: %s</string>
+<string name="profile_import_error">Error importing profile: %s!</string>
+
+<!-- (USB) Serial TNC settings -->
+<string name="p_serial_baudrate">機器通信速度</string>
+<string name="p_serial_baudrate_summary">シリアルポートの転送速度</string>
+<!-- (USB) Serial Errors -->
+<string name="p_serial_unsupported">シリアルポートをサポートしていない！</string>
+<string name="p_serial_noperm">USB機器 無許可!</string>
+<string name="p_serial_notfound">USB機器が見つかりません！</string>
+
+<string name="no_perm_text">The following permissions are required:</string>
+</resources>

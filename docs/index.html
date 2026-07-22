@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0D182D">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="APRSdroid 9M2PJU Mod — enhanced APRS client for Android. Offline maps, BLE TNC, digipeater, I-gate, Mic-E.">
+<meta property="og:title" content="APRSdroid 9M2PJU Mod">
+<meta property="og:description" content="Enhanced APRS companion for Android — 9M2PJU Mod">
+<meta property="og:image" content="assets/icon-512.webp">
+<meta property="og:type" content="website">
+<title>APRSdroid 9M2PJU Mod</title>
+<link rel="icon" href="assets/icon-256.png">
+<link rel="apple-touch-icon" href="assets/icon-256.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <img src="assets/icon-512.webp" alt="APRSdroid 9M2PJU Mod logo" class="hero-logo" width="128" height="128">
+    <h1>APRSdroid <span class="mod">9M2PJU Mod</span></h1>
+    <p class="tagline">The enhanced APRS companion for Android — built by hams, for hams.</p>
+    <a href="#download" class="btn btn-primary btn-lg">Download &nbsp;↓</a>
+  </div>
+</header>
+
+<main>
+
+<section id="download" class="section">
+  <h2>Download</h2>
+  <p class="section-sub">Get the latest APK and the Malaysia offline map below.</p>
+
+  <div id="download-status" class="download-status" aria-live="polite">
+    <span class="spinner"></span> Loading releases…
+  </div>
+
+  <div id="latest-release" class="release-card" hidden>
+    <div class="release-head">
+      <h3 id="latest-name">Latest release</h3>
+      <span id="latest-date" class="release-date"></span>
+    </div>
+    <div id="latest-assets" class="assets"></div>
+    <div class="release-meta">
+      <div class="counter">
+        <span id="latest-downloads" class="counter-num">0</span>
+        <span class="counter-label">downloads (this release)</span>
+      </div>
+      <div class="counter">
+        <span id="total-downloads" class="counter-num">0</span>
+        <span class="counter-label">total downloads (all releases)</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="maps-release" class="release-card" hidden>
+    <div class="release-head">
+      <h3 id="maps-name">9M2PJU Malaysia Offline Maps v1.0</h3>
+      <span id="maps-date" class="release-date"></span>
+    </div>
+    <div id="maps-assets" class="assets"></div>
+    <div class="release-meta">
+      <div class="counter">
+        <span id="maps-downloads" class="counter-num">0</span>
+        <span class="counter-label">downloads</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">
+    <strong>Important:</strong> Uninstall any official APRSdroid before installing this mod
+    (different signing key). Android 11+ devices need to grant
+    <em>All files access</em> for offline MBTiles maps (see Settings → OSM Maps).
+  </p>
+  <p class="section-sub">
+    <strong>Note:</strong> This build is a work in progress — some features may be
+    incomplete or broken at the time of download, as it is actively updated.
+    Google Maps is not supported; the mod uses OSM maps (MBTiles + MapsForge V3)
+    for offline mapping, privacy, and zero dependencies.
+  </p>
+</section>
+
+<section id="setup" class="section">
+  <h2>Setup &amp; offline maps</h2>
+
+  <div class="whatsnew-group">
+    <h3>1. Install APRSdroid</h3>
+    <ol>
+      <li>Uninstall any previous <strong>official</strong> version of APRSdroid (different signing key).</li>
+      <li>Download the latest signed release APK from the <a href="#download">Download section</a> above.</li>
+      <li>Install the APK on your Android device (enable <em>Install from unknown sources</em> if prompted).</li>
+    </ol>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>2. Grant All Files Access (Android 11+)</h3>
+    <p>
+      Required for offline mapping files on Android 11 and above:
+    </p>
+    <ol>
+      <li>In APRSdroid settings, go to the <strong>OSM Maps</strong> category.</li>
+      <li>Tap <strong>"Grant Storage Permissions"</strong>.</li>
+      <li>Grant <strong>ALL file permissions</strong> for device storage access.</li>
+    </ol>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>3. Use MBTiles or MapsForge V3 maps</h3>
+    <ol>
+      <li>Set the map viewer to <strong>OpenStreetMap.org</strong> to use offline maps.</li>
+      <li>Select offline maps and enable offline mode from the preferences in the <strong>OSM Maps</strong> section.</li>
+      <li>If offline mode is not enabled, the online OSM maps server will be used.</li>
+    </ol>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>Where to get maps</h3>
+    <p>
+      APRSdroid requires MBTiles in <strong>PNG or JPG format</strong> (NOT Vector or PBF).
+      NA7Q provides several tools for downloading offline maps:
+    </p>
+    <div class="map-tools-wrap">
+    <table class="map-tools">
+      <thead>
+        <tr><th>Tool</th><th>Platform</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://na7q.com/wp-content/uploads/2024/12/map.mbtiles" target="_blank" rel="noopener">World Map</a></td>
+          <td>Any</td>
+          <td>Ready-to-use starter world map (zoom level 6).</td>
+        </tr>
+        <tr>
+          <td><a href="https://downloads.aprs.wiki/APRSdroid/gui7-concurrency.exe" target="_blank" rel="noopener">OSM Map Maker</a></td>
+          <td>Windows</td>
+          <td>GUI tool for downloading OSM maps.</td>
+        </tr>
+        <tr>
+          <td><a href="https://na7q.com/wp-content/uploads/2025/01/gui7-concurrency.py" target="_blank" rel="noopener">Python Map Maker</a></td>
+          <td>Win/Mac/Linux</td>
+          <td>Python script version, cross-platform.</td>
+        </tr>
+        <tr>
+          <td><a href="https://na7q.com/wp-content/uploads/2025/02/mapmaker-0.2.exe" target="_blank" rel="noopener">Multi-Map Maker</a></td>
+          <td>Windows</td>
+          <td>Supports Google, Google Sat, Google Terrain, OSM, USGS, USFS, Canada Topo, Thunderforest, MapBuilder Light/Dark, and more.</td>
+        </tr>
+        <tr>
+          <td><a href="https://na7q.com/wp-content/uploads/2025/02/mapviewer.exe" target="_blank" rel="noopener">Map Viewer</a></td>
+          <td>Windows</td>
+          <td>Preview different map types to see which style you prefer.</td>
+        </tr>
+        <tr>
+          <td><a href="https://extract.bbbike.org/" target="_blank" rel="noopener">BBBike MapsForge</a></td>
+          <td>Web</td>
+          <td>Custom MapsForge OSM maps online.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p><strong>Map tips:</strong></p>
+    <ul>
+      <li>Use a <strong>precise location</strong> for best results (e.g. "Portland, Oregon", "Oregon USA", "Texas USA"). Use the Map Viewer to double-check the selected area.</li>
+      <li><strong>Zoom level</strong> is required (1-18). A distance input is optional — if left blank for a city, state, or region, it will download everything within that boundary.</li>
+      <li>For <strong>states or larger</strong>, zoom 13-14 is recommended. Washington State at zoom 15 is 2-5GB depending on the map used.</li>
+      <li>Not all maps support all zoom levels or areas — research the map type you want.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="whatsnew" class="section alt">
+  <h2>What's new in the 9M2PJU Mod</h2>
+  <p class="section-sub">
+    A comprehensive refresh of NA7Q's enhanced APRSdroid. Below is everything that changed
+    compared to the upstream NA7Q fork.
+  </p>
+
+  <div class="whatsnew-group">
+    <h3>Repo &amp; branding</h3>
+    <ul>
+      <li><strong>Version bumped</strong> to <code>v2.0.0</code> (APRS tocall <code>APDR20</code>, displayed as "APRSdroid 2.0.0"). Versioning is tag-driven — each release gets a <code>vX.Y.Z</code> tag.</li>
+      <li><strong>New app icon &amp; logo</strong> — all 6 density-specific <code>icon.png</code> files regenerated from a new 2048×2048 source, plus a 512×512 <code>logo.png</code>.</li>
+      <li><strong>Branded splash screen</strong> on cold start — full-screen splash via <code>SplashTheme</code>, 153 KB lossy WebP (down from 4.7 MB PNG).</li>
+    </ul>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>Modern Android support (targetSdk 33 → 35)</h3>
+    <ul>
+      <li><strong><code>targetSdkVersion</code> 33 → 35</strong> (Android 15). Satisfies the Google Play targetSdk floor. <code>minSdkVersion</code> bumped 14 → 19 to enable modern AndroidX libraries.</li>
+      <li><strong>Foreground service types</strong> (Android 14+) — <code>AprsService</code> declares <code>location|microphone|connectedDevice</code>; <code>ServiceNotifier</code> passes an explicit type bitmask to <code>startForeground()</code> on API 29+.</li>
+      <li><strong>Bluetooth permissions</strong> (Android 12+) — added <code>BLUETOOTH_SCAN</code> with <code>neverForLocation</code> and <code>BLUETOOTH_CONNECT</code>; legacy <code>BLUETOOTH</code>/<code>BLUETOOTH_ADMIN</code> capped at <code>maxSdkVersion=30</code>.</li>
+      <li><strong>Storage permissions</strong> (Android 11+) — added <code>MANAGE_EXTERNAL_STORAGE</code> for offline MBTiles map files; legacy storage perms capped at <code>maxSdkVersion=32</code>.</li>
+      <li><strong><code>POST_NOTIFICATIONS</code></strong> (Android 13+) — requested at runtime via <code>PermissionHelper</code>.</li>
+      <li><strong>Edge-to-edge opt-out</strong> (Android 15+) — <code>WindowCompat.setDecorFitsSystemWindows(window, true)</code> prevents content from going under system bars.</li>
+    </ul>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>UI modernization (Phase 1 — theme &amp; chrome)</h3>
+    <ul>
+      <li><strong>Material Design dark theme</strong> — migrated from <code>Theme.Holo</code> (2011) to <code>Theme.MaterialComponents</code>. The app uses a <strong>dark-only</strong> theme with navy surfaces and amber accent, matching the app icon.</li>
+      <li><strong>Brand palette</strong> derived from the app icon — navy surfaces <code>#0D182D</code>/<code>#13203A</code>/<code>#1C2F51</code> (elevation tints), amber accent <code>#CEB619</code>, cool grey text.</li>
+      <li><strong>New dependencies:</strong> <code>androidx.appcompat:appcompat:1.6.1</code> + <code>com.google.android.material:material:1.9.0</code>.</li>
+      <li><strong>Material buttons</strong> with amber background and navy text, applied via <code>materialButtonStyle</code>.</li>
+      <li><strong>Activity migrations:</strong> <code>APRSdroid</code>, <code>ProfileImportActivity</code>, <code>KeyfileImportActivity</code> → <code>AppCompatActivity</code>.</li>
+      <li><strong>Map activity excluded</strong> — <code>MapAct</code> (MapsForge) keeps Holo theme for compatibility; will be migrated in a later phase.</li>
+    </ul>
+    <p class="whatsnew-note">
+      <strong>Phase 2 (not yet done):</strong> ListActivity → RecyclerView,
+      PreferenceActivity → PreferenceFragmentCompat, Material dialogs, layout hardcoded
+      colors → <code>@color/</code> resources, dynamic color (Material You), core-splashscreen API.
+    </p>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>This landing page</h3>
+    <ul>
+      <li><strong>Custom domain:</strong> <a href="https://aprsdroid.hamradio.my/">aprsdroid.hamradio.my</a>.</li>
+      <li><strong>Dark navy + amber theme</strong> matching the app icon.</li>
+      <li><strong>Live download counters</strong> — no backend. Real GitHub release download counts.</li>
+      <li><strong>Download buttons</strong> for every release APK, with file size and per-asset download count.</li>
+    </ul>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>UI/UX improvements (latest)</h3>
+    <ul>
+      <li><strong>Adaptive launcher icon</strong> for Android 13+ — the app icon now fills the entire launcher slot with a navy background, matching how WhatsApp and other modern apps look. No more shrunken logo with a default border.</li>
+      <li><strong>Edge-to-edge fix for Android 15/16</strong> — content no longer draws under the status bar or behind the under-display camera. Proper system bar inset handling for all screens.</li>
+      <li><strong>Bottom navigation blank gap fixed</strong> — the bottom nav bar's background now extends to the screen edge on Android 16, with no blank area below the icons.</li>
+      <li><strong>No sliding animation between tabs</strong> — switching between Log, Hub, Map, and Messages is now instant. Activity transition animations disabled globally.</li>
+      <li><strong>Map recenter button repositioned</strong> — moved above the OSM zoom controls to avoid overlap.</li>
+      <li><strong>OSM Maps preferences reordered</strong> — the file picker now appears before the offline mapping toggle, with a note to select a map file before enabling offline mode.</li>
+      <li><strong>Bottom navigation with Menu tab</strong> — quick access to Preferences, Hub, Log, Map, Messages, and more from any screen. Replaces the old 3-dot overflow menu.</li>
+      <li><strong>Map auto-zooms to GPS location</strong> — on first open, the map centers on the user's last known GPS position instead of a hardcoded default (Berlin).</li>
+      <li><strong>About dialog with logo and full credits</strong> — app logo, project lineage, and credits to Bob Bruninga (WB4APR), Georg Lukas (DO1GL), NA7Q, and 9M2PJU.</li>
+      <li><strong>Donation popup</strong> — appears on page load with Malaysia e-wallet QR, Buy Me a Coffee, and Wise links. Auto-closes after 5 seconds. Fixed to stay on-screen on mobile browsers.</li>
+      <li><strong>Crash fixes</strong> — Android 14+ <code>registerReceiver</code> SecurityException fixed; MessageActivity null ActionBar crash fixed; map screen crash on Material Components theme fixed.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="features" class="section">
+  <h2>Features</h2>
+  <div class="features-grid">
+    <div class="feature">
+      <h3>Real-time position reporting</h3>
+      <p>GPS, fixed, periodic, or SmartBeaconing™. Share your location on the APRS network.</p>
+    </div>
+    <div class="feature">
+      <h3>Offline maps</h3>
+      <p>MBTiles + MapsForge V3. No Google Maps dependency — full OSM compatibility, works without a data connection.</p>
+    </div>
+    <div class="feature">
+      <h3>APRS messaging</h3>
+      <p>Send and receive messages through the network. Per-station conversation threads.</p>
+    </div>
+    <div class="feature">
+      <h3>Digipeater &amp; I-gate</h3>
+      <p>Full 2-way Internet Gateway. Direct or full digipeating. Flexible packet routing (RF + APRS-IS, or RF-only while IGating).</p>
+    </div>
+    <div class="feature">
+      <h3>Radio control</h3>
+      <p>Support for Vero, BTech, Radioddity, and other radios. DigiRig interface support.</p>
+    </div>
+    <div class="feature">
+      <h3>Bluetooth TNC</h3>
+      <p>Classic Bluetooth and stable BLE support. KISS, TNC-2, Kenwood, and AFSK protocols.</p>
+    </div>
+    <div class="feature">
+      <h3>Mic-E compression</h3>
+      <p>Efficient position encoding with Mic-E, including EMERGENCY status support.</p>
+    </div>
+    <div class="feature">
+      <h3>Enhanced station viewer</h3>
+      <p>Hub log sortable by distance or newest. Speed, course, and altitude information.</p>
+    </div>
+  </div>
+</section>
+
+<section id="enhanced" class="section alt">
+  <h2>Enhanced features</h2>
+  <p>
+    Inherited from <a href="https://github.com/na7q/aprsdroid" target="_blank" rel="noopener">NA7Q's enhanced APRSdroid fork</a>
+    (<a href="https://na7q.com/aprsdroid-osm/" target="_blank" rel="noopener">homepage</a>)
+    — not found in the official APRSdroid.
+  </p>
+
+  <div class="whatsnew-group">
+    <h3>RF &amp; networking</h3>
+    <ul>
+      <li><strong>Digipeater</strong> — direct or full digipeating capabilities.</li>
+      <li><strong>2-Way IGating</strong> — full Internet Gateway functionality.</li>
+      <li><strong>Flexible packet routing</strong> — send packets via RF and APRS-IS, or RF only while IGating.</li>
+      <li><strong>Radio control</strong> — support for Vero, BTech, Radioddity, and other radios.</li>
+      <li><strong>DigiRig support</strong> — seamless integration with DigiRig interfaces.</li>
+      <li><strong>Bluetooth Low Energy</strong> — stable BLE support.</li>
+    </ul>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>Advanced offline mapping</h3>
+    <ul>
+      <li><strong>Offline maps with MBTiles</strong> — complete offline operation capability.</li>
+      <li><strong>MapsForge V3 support</strong> — enhanced offline mapping with MapsForge.</li>
+      <li><strong>OpenStreetMap integration</strong> — full OSM compatibility for mapping.</li>
+      <li><strong>Google Maps not supported</strong> — the mod uses OSM maps (MBTiles + MapsForge V3) for offline mapping, privacy, and zero dependencies.</li>
+    </ul>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>Data &amp; compression</h3>
+    <ul>
+      <li><strong>Mic-E compression</strong> — efficient position encoding.</li>
+      <li><strong>Mic-E emergency status</strong> — including EMERGENCY status support.</li>
+      <li><strong>Standard compression</strong> — multiple compression formats supported.</li>
+    </ul>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>User experience enhancements</h3>
+    <ul>
+      <li><strong>Unit options</strong> — choose between Metric or Imperial units.</li>
+      <li><strong>Hardware control</strong> — option to disable hardware acceleration.</li>
+      <li><strong>Enhanced station viewer</strong> — added speed and course information.</li>
+      <li><strong>Advanced messaging tweaks</strong> — features for power users.</li>
+      <li><strong>Message ID control</strong> — option to disable Message ID.</li>
+      <li><strong>Smart Hub log</strong> — sort by distance or newest stations.</li>
+      <li><strong>Under-the-hood improvements</strong> — numerous performance and stability enhancements.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="maps" class="section">
+  <h2>Offline maps</h2>
+
+  <div class="whatsnew-group">
+    <h3>Malaysia, Singapore &amp; Brunei</h3>
+    <p>
+      A ready-to-use offline map for Malaysia, Singapore, and Brunei is
+      available as a GitHub release asset (528 MB zip, contains MapsForge
+      <code>.map</code> + MBTiles files).
+    </p>
+    <p>
+      <a class="btn-download" href="https://github.com/9M2PJU/APRSdroid-9M2PJU-Mod/releases/tag/maps-v1.0" target="_blank" rel="noopener">
+        Download 9M2PJU Malaysia Offline Maps
+      </a>
+    </p>
+    <h4>Installation</h4>
+    <ol>
+      <li>Download and extract the zip file on your computer</li>
+      <li>Copy <code>malaysia-singapore-brunei.map</code> to your phone (any folder)</li>
+      <li>In APRSdroid: <strong>Menu</strong> → <strong>Preferences</strong> → <strong>OSM Maps</strong> → <strong>Select MapsforgeV3 or .mbtiles map</strong></li>
+      <li>Select the <code>.map</code> file you copied</li>
+      <li>Enable <strong>"Enable offline mapping"</strong></li>
+      <li>Open <strong>Map</strong> — the offline map loads without internet</li>
+    </ol>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>Other regions</h3>
+    <p>NA7Q provides several tools for downloading offline maps for other regions:</p>
+    <ul>
+      <li><a href="https://na7q.com/wp-content/uploads/2024/12/map.mbtiles" target="_blank" rel="noopener">World Map</a> — ready-to-use starter world map (zoom 6)</li>
+      <li><a href="https://downloads.aprs.wiki/APRSdroid/gui7-concurrency.exe" target="_blank" rel="noopener">OSM Map Maker</a> (Windows) — GUI tool for downloading OSM maps</li>
+      <li><a href="https://na7q.com/wp-content/uploads/2025/01/gui7-concurrency.py" target="_blank" rel="noopener">Python Map Maker</a> (cross-platform) — Python script version</li>
+      <li><a href="https://na7q.com/wp-content/uploads/2025/02/mapmaker-0.2.exe" target="_blank" rel="noopener">Multi-Map Maker</a> (Windows) — Google, OSM, USGS, Canada Topo, and more</li>
+      <li><a href="https://extract.bbbike.org/" target="_blank" rel="noopener">BBBike MapsForge</a> (web) — custom MapsForge OSM maps online</li>
+    </ul>
+  </div>
+</section>
+
+<section id="lora" class="section">
+  <h2>Connecting a LoRa APRS tracker via Bluetooth (BLE KISS TNC)</h2>
+
+  <p>
+    APRSdroid can connect to LoRa APRS tracker boards (e.g. LilyGO T-Beam,
+    TTGO T-Beam, Heltec WiFi LoRa 32, RAK Wireless modules, and other
+    ESP32-based APRS trackers) using <strong>Bluetooth Low Energy (BLE)</strong>
+    with the <strong>KISS TNC</strong> protocol. This lets you send and receive
+    APRS packets over LoRa radio without a phone data connection.
+  </p>
+
+  <div class="whatsnew-group">
+    <h3>Requirements</h3>
+    <ul>
+      <li>A LoRa APRS tracker board with BLE KISS TNC firmware (e.g.
+        <a href="https://github.com/richonguzman/LoRa_APRS_Tracker" target="_blank" rel="noopener">richonguzman's LoRa APRS Tracker</a>)</li>
+      <li>Android phone with Bluetooth</li>
+      <li>APRSdroid 9M2PJU Mod installed</li>
+    </ul>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>Setup steps</h3>
+    <ol>
+      <li><strong>Flash your tracker board</strong> with BLE KISS TNC firmware (if not already done). The firmware must advertise a BLE KISS service.</li>
+      <li><strong>Power on the tracker</strong> and put it in BLE pairing mode (usually automatic on boot).</li>
+      <li><strong>Pair the tracker with your phone:</strong>
+        <ul>
+          <li>Go to Android <strong>Settings</strong> → <strong>Bluetooth</strong></li>
+          <li>Find your tracker in the device list (e.g. "LoraTracker" or "LoRa_APRS")</li>
+          <li>Tap to pair</li>
+        </ul>
+      </li>
+      <li><strong>Configure APRSdroid:</strong>
+        <ul>
+          <li>Open APRSdroid → <strong>Menu</strong> → <strong>Preferences</strong> → <strong>Connection Setup</strong></li>
+          <li>Select <strong>Bluetooth TNC (KISS)</strong> as the backend</li>
+          <li>Select your tracker from the Bluetooth device list</li>
+          <li>Set your callsign and passcode</li>
+        </ul>
+      </li>
+      <li><strong>Start the service:</strong>
+        <ul>
+          <li>Tap the <strong>Start</strong> button (or <strong>Menu</strong> → <strong>Start</strong>)</li>
+          <li>APRSdroid will connect to the tracker via BLE</li>
+          <li>Position reports are sent over LoRa radio</li>
+          <li>Received packets appear in the Log and on the Map</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>How it works</h3>
+    <pre>GPS → Phone → APRSdroid → BLE → LoRa Tracker → LoRa Radio → APRS Network
+                                                    ↓
+                                          Received packets → APRSdroid</pre>
+    <ul>
+      <li><strong>Outgoing:</strong> APRSdroid gets your GPS position, formats an APRS packet, and sends it to the tracker via BLE KISS TNC. The tracker transmits it over LoRa radio.</li>
+      <li><strong>Incoming:</strong> The tracker receives LoRa APRS packets and forwards them to APRSdroid via BLE. APRSdroid decodes and displays them.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="screenshots" class="section">
+  <h2>Screenshots</h2>
+  <p class="section-sub">
+    A look at the app in action on a real device.
+  </p>
+
+  <div class="screenshots-grid">
+    <figure>
+      <img src="assets/screenshots/screenshot-log.png" alt="Log screen" loading="lazy">
+      <figcaption>Log — packet log</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/screenshots/screenshot-hub.png" alt="Hub screen" loading="lazy">
+      <figcaption>Hub — nearby stations</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/screenshots/screenshot-map.png" alt="Map screen" loading="lazy">
+      <figcaption>Map — offline map view</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/screenshots/screenshot-messages.png" alt="Messages screen" loading="lazy">
+      <figcaption>Messages — conversations</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/screenshots/screenshot-prefs.png" alt="Preferences screen" loading="lazy">
+      <figcaption>Preferences — settings</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/splash-user.jpg" alt="Splash screen" loading="lazy">
+      <figcaption>Splash — branded startup</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <h2>About &amp; credits</h2>
+
+  <p class="section-sub">
+    APRSdroid has a rich history of contributions from the amateur radio
+    community. This project stands on the shoulders of giants.
+  </p>
+
+  <div class="whatsnew-group">
+    <h3>Georg Lukas (ge0rg) — Original Author</h3>
+    <p>
+      <a href="https://aprsdroid.org/" target="_blank" rel="noopener">APRSdroid</a>
+      was created by <strong>Georg Lukas, ge0rg</strong> and has been the
+      premier APRS client for Android since 2010. Written in Scala with a
+      Java core, it supports TCP/IP, AFSK, Bluetooth TNCs, and USB TNCs.
+      Georg continues to maintain the upstream project and graciously
+      licenses it under the <a href="https://www.gnu.org/licenses/gpl-2.0.html" target="_blank" rel="noopener">GNU GPLv2</a>
+      so that the community can build on his work.
+    </p>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>NA7Q — Enhanced Fork</h3>
+    <p>
+      <a href="https://github.com/na7q/aprsdroid" target="_blank" rel="noopener">NA7Q's fork</a>
+      builds on Georg's original work with significant enhancements:
+    </p>
+    <ul>
+      <li>BLE TNC support for modern Bluetooth TNCs (Mobilinkd, DigiRig, etc.)</li>
+      <li>Digipeater and IGate functionality</li>
+      <li>Symbol overlay support</li>
+      <li>Mic-E decoding improvements</li>
+      <li>Various bug fixes and compatibility updates</li>
+    </ul>
+    <p>NA7Q's fork is the direct upstream of this mod.</p>
+    <p>
+      <strong>Homepage:</strong>
+      <a href="https://na7q.com/aprsdroid-osm/" target="_blank" rel="noopener">https://na7q.com/aprsdroid-osm/</a>
+    </p>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>9M2PJU — This Mod</h3>
+    <p>
+      This mod, maintained by <strong>9M2PJU</strong> (Kuala Lumpur, Malaysia),
+      builds on NA7Q's fork with a focus on modern Android compatibility,
+      UI/UX polish, and project infrastructure. Contributions include:
+    </p>
+    <ul>
+      <li><strong>Adaptive launcher icon</strong> for Android 13+ — full logo with navy background, matching modern app icons.</li>
+      <li><strong>New app icon and logo</strong> across all density buckets.</li>
+      <li><strong>Branded splash screen</strong> with perfect-fit centerCrop rendering.</li>
+      <li><strong>Modern Android support</strong> — <code>targetSdk 35</code>, foreground service types for Android 14+, Bluetooth permissions for Android 12+, storage permissions for Android 11+, <code>POST_NOTIFICATIONS</code> for Android 13+, edge-to-edge opt-out with proper system bar inset handling for Android 15+.</li>
+      <li><strong>Material 3-inspired UI design system</strong> — <code>Theme.MaterialComponents</code> with tonal navy/amber palette, shape theming, refined typography, modern component styles, bottom navigation bar, dark theme, no sliding animations between screens.</li>
+      <li><strong>GitHub Actions CI/CD</strong> — signed release APK builds, automatic GitHub Releases on <code>v*</code> tags, auto-generated <code>version.json</code>.</li>
+      <li><strong>GitHub Pages landing page</strong> at <a href="https://aprsdroid.hamradio.my/">aprsdroid.hamradio.my</a> with live download counters, responsive for desktop and mobile.</li>
+      <li><strong>In-app update checker</strong> — download and install updates directly from GitHub Releases, with Cloudflare CDN fallback.</li>
+      <li><strong>Android 14+ crash fix</strong> — <code>RECEIVER_NOT_EXPORTED</code> flag for <code>registerReceiver</code>.</li>
+      <li><strong>App name and About dialog unified</strong> across all 52 locale files.</li>
+      <li><strong>Version bumped</strong> to <code>v2.0.0</code> (tocall <code>APDR20</code>).</li>
+      <li><strong>Comprehensive README and documentation rewrite</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="whatsnew-group">
+    <h3>Bob Bruninga, WB4APR — Creator of APRS</h3>
+    <p>
+      <strong>Bob Bruninga, WB4APR</strong> (1947–2022) created the Automatic
+      Packet Reporting System (APRS) in the 1980s. His vision of a real-time,
+      position-aware digital communications network for amateur radio lives on
+      in every APRS client, igate, and digipeater worldwide. Without Bob's
+      pioneering work, none of this would exist.
+    </p>
+  </div>
+
+  <p>
+    APRS&reg; is a registered trademark of Bob Bruninga, WB4APR.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <p class="footer-meta">Made with care by <a href="https://hamradio.my" target="_blank" rel="noopener">9M2PJU</a>. 73.</p>
+</footer>
+
+<script src="script.js"></script>
+
+<!-- Donation popup -->
+<div id="donation-popup" class="donation-popup-overlay" style="display:none;">
+  <div class="donation-popup">
+    <button class="donation-close" id="donation-close" aria-label="Close">&times;</button>
+    <h2>Support APRSdroid 9M2PJU Mod</h2>
+    <p class="donation-sub">If you can buy a paid app, why not donate a little for free software? 😊</p>
+    <div class="donation-qr-wrap">
+      <img src="assets/donation-qr.png" alt="Malaysia e-wallet donation QR" class="donation-qr">
+      <p class="donation-qr-caption">Scan with Boost, Touch 'n Go, GrabPay, or any Malaysian e-wallet</p>
+    </div>
+    <div class="donation-buttons">
+      <a href="https://www.buymeacoffee.com/9m2pju" target="_blank" rel="noopener" class="btn btn-primary">
+        Buy Me a Coffee
+      </a>
+      <a href="https://wise.com/pay/me/faizulz13" target="_blank" rel="noopener" class="btn btn-secondary">
+        Donate with WISE
+      </a>
+    </div>
+    <p class="donation-auto-close" id="donation-countdown">Auto-closing in 5&hellip;</p>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Show donation popup on page load
+  function showDonationPopup() {
+    var popup = document.getElementById('donation-popup');
+    if (!popup) return;
+    // Show on every visit
+    popup.style.display = 'flex';
+    var countdown = 5;
+    var countdownEl = document.getElementById('donation-countdown');
+    var timer = setInterval(function() {
+      countdown--;
+      if (countdownEl) countdownEl.innerHTML = 'Auto-closing in ' + countdown + '&hellip;';
+      if (countdown <= 0) {
+        clearInterval(timer);
+        closeDonationPopup();
+      }
+    }, 1000);
+  }
+  function closeDonationPopup() {
+    var popup = document.getElementById('donation-popup');
+    if (popup) popup.style.display = 'none';
+  }
+  document.getElementById('donation-close').addEventListener('click', closeDonationPopup);
+  // Close on overlay click
+  document.getElementById('donation-popup').addEventListener('click', function(e) {
+    if (e.target === this) closeDonationPopup();
+  });
+  // Show after a short delay
+  window.addEventListener('load', function() {
+    setTimeout(showDonationPopup, 800);
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Boolean resources for system bar icon styling. Dark-only theme. -->
+<resources>
+    <!-- Dark nav bar → light icons (true). -->
+    <bool name="light_nav_bar_icons">true</bool>
+</resources>
