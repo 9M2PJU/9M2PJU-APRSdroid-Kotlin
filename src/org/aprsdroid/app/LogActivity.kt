@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import org.aprsdroid.app.ui.PostListScreen
 import org.aprsdroid.app.ui.PostListViewModel
@@ -21,24 +22,18 @@ class LogActivity : ComponentActivity() {
     private val viewModel: PostListViewModel by viewModels()
     private val prefs by lazy { PrefsWrapper(this) }
 
-    private val permissionHelper by lazy {
-        PermissionHelper(
-            activity = this,
-            getActionName = { action ->
-                when (action) {
-                    START_SERVICE -> R.string.startlog
-                    START_SERVICE_ONCE -> R.string.singlelog
-                    else -> R.string.startlog
-                }
-            },
-            onAllGranted = { action ->
-                when (action) {
-                    START_SERVICE -> startService(AprsService.intent(this, AprsService.SERVICE))
-                    START_SERVICE_ONCE -> startService(AprsService.intent(this, AprsService.SERVICE_ONCE))
-                }
-            },
-            onFailedCancel = { /* nop */ },
-        )
+    private var pendingAction = 0
+
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { results ->
+        val allGranted = results.values.all { it }
+        if (allGranted) {
+            when (pendingAction) {
+                START_SERVICE -> startService(AprsService.intent(this, AprsService.SERVICE))
+                START_SERVICE_ONCE -> startService(AprsService.intent(this, AprsService.SERVICE_ONCE))
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,23 +61,33 @@ class LogActivity : ComponentActivity() {
     }
 
     private fun startAprsService(action: Int) {
+        pendingAction = action
         val perms = AprsBackend.defaultBackendPermissions(prefs).toTypedArray()
-        permissionHelper.checkPermissions(perms, action)
+        if (perms.isEmpty()) {
+            // No permissions needed, start directly
+            when (action) {
+                START_SERVICE -> startService(AprsService.intent(this, AprsService.SERVICE))
+                START_SERVICE_ONCE -> startService(AprsService.intent(this, AprsService.SERVICE_ONCE))
+            }
+        } else {
+            // Check which permissions are not yet granted
+            val needed = perms.filter {
+                checkSelfPermission(it) != android.content.pm.PackageManager.PERMISSION_GRANTED
+            }
+            if (needed.isEmpty()) {
+                when (action) {
+                    START_SERVICE -> startService(AprsService.intent(this, AprsService.SERVICE))
+                    START_SERVICE_ONCE -> startService(AprsService.intent(this, AprsService.SERVICE_ONCE))
+                }
+            } else {
+                permissionLauncher.launch(needed.toTypedArray())
+            }
+        }
     }
 
     private fun stopAprsService() {
         prefs.prefs.edit().putBoolean("service_running", false).commit()
         stopService(AprsService.intent(this, AprsService.SERVICE))
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray,
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        @Suppress("UNCHECKED_CAST")
-        permissionHelper.onResult(requestCode, permissions as Array<String>, grantResults)
     }
 
     private fun navigateTo(target: NavTarget) {
