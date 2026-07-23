@@ -19,3 +19,5 @@ wiki/
 AGENTS.md
 .dev/
 release.keystore
+release.keystore.b64
+.kotlin/
