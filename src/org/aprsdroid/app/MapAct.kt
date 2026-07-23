@@ -10,6 +10,14 @@ import android.content.res.Configuration
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.savedstate.SavedStateRegistry
+import androidx.savedstate.SavedStateRegistryController
+import androidx.savedstate.SavedStateRegistryOwner
 import android.graphics.Point
 import android.graphics.Rect
 import android.graphics.Typeface
@@ -77,7 +85,7 @@ import org.aprsdroid.app.data.AprsDatabase
  * offline map files, online OSM tiles, coordinate chooser mode, and
  * tap-to-open station details.
  */
-class MapAct : MapActivity() {
+class MapAct : MapActivity(), LifecycleOwner, ViewModelStoreOwner, SavedStateRegistryOwner {
 
     private val tag = "APRSdroid.Map"
 
@@ -91,6 +99,17 @@ class MapAct : MapActivity() {
     internal var mapview: MapView? = null
     private val allicons by lazy { ContextCompat.getDrawable(this, R.drawable.allicons) as BitmapDrawable }
     private val staoverlay by lazy { StationOverlay(allicons, this) }
+
+    // --- Compose lifecycle support ---
+    // MapActivity (from MapsForge) is a plain Activity, not ComponentActivity,
+    // so we need to provide Lifecycle/ViewModelStore/SavedStateRegistry for ComposeView.
+    private val lifecycleRegistry = LifecycleRegistry(this)
+    private val viewModelStore = ViewModelStore()
+    private val savedStateRegistryController = SavedStateRegistryController.create(this)
+    override val lifecycle: Lifecycle get() = lifecycleRegistry
+    override val viewModelStore: ViewModelStore get() = viewModelStore
+    override val savedStateRegistry: SavedStateRegistry
+        get() = savedStateRegistryController.savedStateRegistry
 
     private val locReceiver by lazy {
         LocationReceiver2(
@@ -110,6 +129,7 @@ class MapAct : MapActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        savedStateRegistryController.performRestore(savedInstanceState)
         UIHelper.applySystemBarInsets(this)
 
         targetcall = intent.dataString ?: ""
@@ -123,6 +143,50 @@ class MapAct : MapActivity() {
             MapScreen()
         }
         setContentView(composeView)
+
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        mapview?.requestFocus()
+    }
+
+    override fun onPause() {
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+        val mv = mapview
+        if (mv != null) {
+            val pos = mv.mapPosition.mapPosition
+            if (pos?.geoPoint != null) {
+                saveMapViewPosition(
+                    pos.geoPoint.latitudeE6 / 1000000.0f,
+                    pos.geoPoint.longitudeE6 / 1000000.0f,
+                    pos.zoomLevel.toFloat(),
+                )
+            }
+        }
+        super.onPause()
+    }
+
+    override fun onStop() {
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        viewModelStore.clear()
+        try {
+            unregisterReceiver(locReceiver)
+        } catch (_: Exception) {
+        }
+        super.onDestroy()
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -305,33 +369,8 @@ class MapAct : MapActivity() {
         Toast.makeText(this, R.string.map_no_location, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onResume() {
-        super.onResume()
-        mapview?.requestFocus()
-    }
-
     override fun onConfigurationChanged(c: Configuration) {
         super.onConfigurationChanged(c)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        val mv = mapview ?: return
-        val pos = mv.mapPosition.mapPosition ?: return
-        pos.geoPoint ?: return
-        saveMapViewPosition(
-            pos.geoPoint.latitudeE6 / 1000000.0f,
-            pos.geoPoint.longitudeE6 / 1000000.0f,
-            pos.zoomLevel.toFloat(),
-        )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        try {
-            unregisterReceiver(locReceiver)
-        } catch (_: Exception) {
-        }
     }
 
     private fun saveMapViewPosition(lat: Float, lon: Float, zoom: Float) {
