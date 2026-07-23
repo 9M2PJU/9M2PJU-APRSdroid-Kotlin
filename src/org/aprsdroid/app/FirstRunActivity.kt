@@ -1,5 +1,6 @@
 package org.aprsdroid.app
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -30,7 +31,15 @@ class FirstRunActivity : ComponentActivity() {
                 PasscodeDialogCompose(
                     activity = this,
                     firstrun = true,
-                    onDismiss = {},
+                    onDismiss = {
+                        // After the passcode dialog closes, restart the main
+                        // activity so it re-evaluates the navigation target
+                        // (now that permissions_requested=true).
+                        val i = Intent(this, APRSdroid::class.java)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                        startActivity(i)
+                        finish()
+                    },
                 )
             }
         }

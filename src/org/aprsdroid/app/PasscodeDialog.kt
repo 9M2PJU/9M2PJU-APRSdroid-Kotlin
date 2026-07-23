@@ -162,5 +162,8 @@ private fun savePasscode(
         pe.putString("passcode", passcode)
     }
     pe.putBoolean("firstrun", !completed)
+    if (completed) {
+        pe.putBoolean("permissions_requested", true)
+    }
     pe.commit()
 }
