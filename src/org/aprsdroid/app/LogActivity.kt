@@ -62,7 +62,10 @@ class LogActivity : ComponentActivity() {
 
     private fun startAprsService(action: Int) {
         pendingAction = action
-        val perms = AprsBackend.defaultBackendPermissions(prefs).toTypedArray()
+        val perms = (
+            AprsBackend.defaultBackendPermissions(prefs) +
+            LocationSource.getPermissions(prefs)
+        ).toTypedArray()
         if (perms.isEmpty()) {
             // No permissions needed, start directly
             when (action) {
