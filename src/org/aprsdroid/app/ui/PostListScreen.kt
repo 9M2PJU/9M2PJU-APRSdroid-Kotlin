@@ -1,5 +1,6 @@
 package org.aprsdroid.app.ui
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,37 +10,125 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Hub
+import androidx.compose.material.icons.filled.Map
+import androidx.compose.material.icons.filled.Message
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Stop
+import androidx.compose.material.icons.filled.Subject
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import org.aprsdroid.app.data.PostEntity
+import org.aprsdroid.app.NavTarget
 
 /**
  * Compose screen for the packet log / activity feed.
  *
  * Replaces the Scala `LogActivity` + `PostListAdapter` +
  * `SimpleCursorAdapter` stack with a single Compose `LazyColumn`
- * backed by [PostListViewModel].
+ * backed by [PostListViewModel]. Includes Start/Stop service
+ * buttons and bottom navigation bar.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PostListScreen(viewModel: PostListViewModel) {
+fun PostListScreen(
+    viewModel: PostListViewModel,
+    isServiceRunning: Boolean,
+    onStartService: () -> Unit,
+    onStopService: () -> Unit,
+    onSingleShot: () -> Unit,
+    onNavigate: (NavTarget) -> Unit,
+    onPreferences: () -> Unit,
+) {
     val posts by viewModel.posts.collectAsState()
+    var showMenu by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("APRS Log") })
+            TopAppBar(
+                title = { Text("APRS Log") },
+                actions = {
+                    // Start/Stop button
+                    IconButton(onClick = {
+                        if (isServiceRunning) onStopService() else onStartService()
+                    }) {
+                        Icon(
+                            if (isServiceRunning) Icons.Filled.Stop else Icons.Filled.PlayArrow,
+                            contentDescription = if (isServiceRunning) "Stop" else "Start",
+                            tint = if (isServiceRunning) Color(0xFF8B0000)
+                                   else Color(0xFF006400),
+                        )
+                    }
+                    // Single-shot button
+                    IconButton(onClick = onSingleShot) {
+                        Icon(Icons.Filled.Subject, contentDescription = "Single")
+                    }
+                    // Overflow menu
+                    IconButton(onClick = { showMenu = true }) {
+                        Icon(Icons.Filled.MoreVert, contentDescription = "Menu")
+                    }
+                    DropdownMenu(
+                        expanded = showMenu,
+                        onDismissRequest = { showMenu = false },
+                    ) {
+                        DropdownMenuItem(
+                            text = { Text("Preferences") },
+                            onClick = {
+                                showMenu = false
+                                onPreferences()
+                            },
+                        )
+                    }
+                },
+            )
+        },
+        bottomBar = {
+            BottomAppBar(
+                actions = {
+                    IconButton(onClick = { onNavigate(NavTarget.HUB) }) {
+                        Icon(Icons.Filled.Hub, contentDescription = "Hub")
+                    }
+                    IconButton(onClick = { onNavigate(NavTarget.MAP) }) {
+                        Icon(Icons.Filled.Map, contentDescription = "Map")
+                    }
+                    IconButton(onClick = { onNavigate(NavTarget.MESSAGES) }) {
+                        Icon(Icons.Filled.Message, contentDescription = "Messages")
+                    }
+                    IconButton(onClick = { onNavigate(NavTarget.LOG) }) {
+                        Icon(Icons.Filled.Subject, contentDescription = "Log")
+                    }
+                },
+                floatingActionButton = {
+                    FloatingActionButton(onClick = { onPreferences() }) {
+                        Icon(Icons.Filled.Settings, contentDescription = "Settings")
+                    }
+                },
+            )
         },
     ) { padding ->
         if (posts.isEmpty()) {
@@ -53,8 +142,16 @@ fun PostListScreen(viewModel: PostListViewModel) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    CircularProgressIndicator()
-                    Text("Loading packets...")
+                    Text(
+                        "No packets yet.",
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                    Text(
+                        if (isServiceRunning) "Listening for packets..."
+                        else "Press Play to start the APRS service.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                 }
             }
         } else {
