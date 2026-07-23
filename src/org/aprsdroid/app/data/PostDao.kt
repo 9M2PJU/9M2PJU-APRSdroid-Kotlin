@@ -67,6 +67,19 @@ interface PostDao {
     fun getStaPosts(call: String, limit: String): Flow<List<PostEntity>> =
         getStaPosts("$call%", "%;$call%", "%)$call%", limit)
 
+    @Query("""
+        SELECT * FROM posts WHERE
+           message LIKE :callPrefix
+           OR message LIKE :objPattern
+           OR message LIKE :itemPattern
+        ORDER BY _id
+        """)
+    suspend fun getStaPostsList(
+        callPrefix: String,
+        objPattern: String,
+        itemPattern: String,
+    ): List<PostEntity>
+
     /**
      * Posts suitable for export — incoming/tx/digi/igate packets
      * (Scala `getExportPosts`: type IN (0, 3, 5, 6)).
@@ -76,6 +89,9 @@ interface PostDao {
 
     @Query("SELECT * FROM posts WHERE type IN (0, 3, 5, 6) ORDER BY _id")
     fun getExportPostsAll(): Flow<List<PostEntity>>
+
+    @Query("SELECT * FROM posts WHERE type IN (0, 3, 5, 6) ORDER BY _id")
+    suspend fun getExportPostsList(): List<PostEntity>
 
     // ---- maintenance ----
 

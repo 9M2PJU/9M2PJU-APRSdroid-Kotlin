@@ -1,6 +1,7 @@
 package org.aprsdroid.app
 
 import org.aprsdroid.app.ui.AprsBottomBar
+import org.aprsdroid.app.ui.AprsOverflowMenu
 
 import android.app.AlertDialog
 import android.content.Context
@@ -41,10 +42,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material.icons.filled.MyLocation
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -192,7 +196,6 @@ class MapAct : MapActivity(), LifecycleOwner, ViewModelStoreOwner, SavedStateReg
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     private fun MapScreen() {
-        var showMenu by remember { mutableStateOf(false) }
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -203,24 +206,25 @@ class MapAct : MapActivity(), LifecycleOwner, ViewModelStoreOwner, SavedStateReg
                     },
                     actions = {
                         if (!isCoordinateChooser) {
-                            IconButton(onClick = { showMenu = true }) {
-                                Icon(Icons.Filled.MoreVert, contentDescription = "Menu")
-                            }
-                            DropdownMenu(
-                                expanded = showMenu,
-                                onDismissRequest = { showMenu = false },
-                            ) {
-                                DropdownMenuItem(
-                                    text = { Text(getString(R.string.map_objects)) },
-                                    onClick = {
-                                        showMenu = false
-                                        val newState = prefs.toggleBoolean("show_objects", true)
-                                        showObjectsChecked = newState
-                                        showObjects = newState
-                                        reloadMap()
-                                    },
+                            // Show objects toggle
+                            IconButton(onClick = {
+                                val newState = prefs.toggleBoolean("show_objects", true)
+                                showObjectsChecked = newState
+                                showObjects = newState
+                                reloadMap()
+                            }) {
+                                Icon(
+                                    if (showObjects) Icons.Filled.Visibility
+                                    else Icons.Filled.VisibilityOff,
+                                    contentDescription = "Toggle objects",
                                 )
                             }
+                            // Shared overflow menu
+                            AprsOverflowMenu(
+                                showAgeFilter = true,
+                                onPreferences = { AprsNavigation.openPreferences(this@MapAct) },
+                                onAgeChanged = { reloadMap() },
+                            )
                         }
                     },
                 )

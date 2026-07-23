@@ -35,4 +35,9 @@ class HubActivity : ComponentActivity() {
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        UpdateChecker.checkForUpdates(this)
+    }
 }
