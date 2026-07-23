@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.aprsdroid.app.NavTarget
 import org.aprsdroid.app.data.StationEntity
 
 /**
@@ -33,12 +34,23 @@ import org.aprsdroid.app.data.StationEntity
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StationListScreen(viewModel: StationListViewModel) {
+fun StationListScreen(
+    viewModel: StationListViewModel,
+    onNavigate: (NavTarget) -> Unit = {},
+    onPreferences: () -> Unit = {},
+) {
     val stations by viewModel.stations.collectAsState()
 
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Stations") })
+        },
+        bottomBar = {
+            AprsBottomBar(
+                current = NavTarget.HUB,
+                onNavigate = onNavigate,
+                onPreferences = onPreferences,
+            )
         },
     ) { padding ->
         if (stations.isEmpty()) {

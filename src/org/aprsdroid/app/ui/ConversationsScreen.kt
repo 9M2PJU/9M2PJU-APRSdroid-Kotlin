@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import org.aprsdroid.app.NavTarget
 import org.aprsdroid.app.data.MessageEntity
 
 /**
@@ -41,12 +42,21 @@ import org.aprsdroid.app.data.MessageEntity
 fun ConversationsScreen(
     viewModel: ConversationsViewModel,
     onConversationClick: (String) -> Unit,
+    onNavigate: (NavTarget) -> Unit = {},
+    onPreferences: () -> Unit = {},
 ) {
     val conversations by viewModel.conversations.collectAsState()
 
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Conversations") })
+        },
+        bottomBar = {
+            AprsBottomBar(
+                current = NavTarget.MESSAGES,
+                onNavigate = onNavigate,
+                onPreferences = onPreferences,
+            )
         },
     ) { padding ->
         if (conversations.isEmpty()) {

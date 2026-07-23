@@ -1,5 +1,7 @@
 package org.aprsdroid.app
 
+import org.aprsdroid.app.ui.AprsBottomBar
+
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -164,6 +166,15 @@ class MapAct : MapActivity() {
                     FloatingActionButton(onClick = { centerOnMyLocation() }) {
                         Icon(Icons.Filled.MyLocation, contentDescription = "My Location")
                     }
+                }
+            },
+            bottomBar = {
+                if (!isCoordinateChooser) {
+                    AprsBottomBar(
+                        current = NavTarget.MAP,
+                        onNavigate = { target -> AprsNavigation.navigateTo(this, target, prefs) },
+                        onPreferences = { AprsNavigation.openPreferences(this) },
+                    )
                 }
             },
         ) { padding ->

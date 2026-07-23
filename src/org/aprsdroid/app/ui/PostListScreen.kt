@@ -11,27 +11,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Hub
-import androidx.compose.material.icons.filled.Map
-import androidx.compose.material.icons.filled.Message
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material.icons.filled.Subject
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -109,26 +100,10 @@ fun PostListScreen(
             )
         },
         bottomBar = {
-            BottomAppBar(
-                actions = {
-                    IconButton(onClick = { onNavigate(NavTarget.HUB) }) {
-                        Icon(Icons.Filled.Hub, contentDescription = "Hub")
-                    }
-                    IconButton(onClick = { onNavigate(NavTarget.MAP) }) {
-                        Icon(Icons.Filled.Map, contentDescription = "Map")
-                    }
-                    IconButton(onClick = { onNavigate(NavTarget.MESSAGES) }) {
-                        Icon(Icons.Filled.Message, contentDescription = "Messages")
-                    }
-                    IconButton(onClick = { onNavigate(NavTarget.LOG) }) {
-                        Icon(Icons.Filled.Subject, contentDescription = "Log")
-                    }
-                },
-                floatingActionButton = {
-                    FloatingActionButton(onClick = { onPreferences() }) {
-                        Icon(Icons.Filled.Settings, contentDescription = "Settings")
-                    }
-                },
+            AprsBottomBar(
+                current = NavTarget.LOG,
+                onNavigate = onNavigate,
+                onPreferences = onPreferences,
             )
         },
     ) { padding ->

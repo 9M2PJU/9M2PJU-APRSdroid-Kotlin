@@ -19,17 +19,23 @@ import org.aprsdroid.app.ui.theme.AprsTheme
 class ConversationsActivity : ComponentActivity() {
 
     private val viewModel: ConversationsViewModel by viewModels()
+    private val prefs by lazy { PrefsWrapper(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         UIHelper.applySystemBarInsets(this)
         setContent {
             AprsTheme {
-                ConversationsScreen(viewModel) { call ->
-                    val intent = Intent(this, MessageActivity::class.java)
-                    intent.putExtra("call", call)
-                    startActivity(intent)
-                }
+                ConversationsScreen(
+                    viewModel = viewModel,
+                    onConversationClick = { call ->
+                        val intent = Intent(this, MessageActivity::class.java)
+                        intent.putExtra("call", call)
+                        startActivity(intent)
+                    },
+                    onNavigate = { target -> AprsNavigation.navigateTo(this, target, prefs) },
+                    onPreferences = { AprsNavigation.openPreferences(this) },
+                )
             }
         }
     }

@@ -49,8 +49,8 @@ class LogActivity : ComponentActivity() {
                     onStartService = { startAprsService(START_SERVICE) },
                     onStopService = { stopAprsService() },
                     onSingleShot = { startAprsService(START_SERVICE_ONCE) },
-                    onNavigate = { target -> navigateTo(target) },
-                    onPreferences = { startActivity(Intent(this, PrefsAct::class.java)) },
+                    onNavigate = { target -> AprsNavigation.navigateTo(this, target, prefs) },
+                    onPreferences = { AprsNavigation.openPreferences(this) },
                 )
             }
         }
@@ -101,21 +101,6 @@ class LogActivity : ComponentActivity() {
             android.util.Log.e("APRSdroid.Log", "Failed to stop service", e)
             Toast.makeText(this, "Could not stop service: ${e.message}", Toast.LENGTH_LONG).show()
         }
-    }
-
-    private fun navigateTo(target: NavTarget) {
-        val cls = when (target) {
-            NavTarget.HUB -> HubActivity::class.java
-            NavTarget.LOG -> return // already here
-            NavTarget.MAP -> {
-                MapModes.startMap(this, prefs, "")
-                return
-            }
-            NavTarget.MESSAGES -> ConversationsActivity::class.java
-        }
-        startActivity(Intent(this, cls)
-            .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or Intent.FLAG_ACTIVITY_NO_ANIMATION))
-        overridePendingTransition(0, 0)
     }
 
     companion object {
