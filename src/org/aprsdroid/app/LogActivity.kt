@@ -81,7 +81,8 @@ class LogActivity : ComponentActivity() {
         grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        permissionHelper.onResult(requestCode, permissions, grantResults)
+        @Suppress("UNCHECKED_CAST")
+        permissionHelper.onResult(requestCode, permissions as Array<String>, grantResults)
     }
 
     private fun navigateTo(target: NavTarget) {

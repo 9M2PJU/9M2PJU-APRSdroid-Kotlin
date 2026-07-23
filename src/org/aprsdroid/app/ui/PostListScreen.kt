@@ -45,6 +45,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import org.aprsdroid.app.NavTarget
+import org.aprsdroid.app.data.PostEntity
 
 /**
  * Compose screen for the packet log / activity feed.
