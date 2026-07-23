@@ -2,6 +2,7 @@ package org.aprsdroid.app
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -62,35 +63,44 @@ class LogActivity : ComponentActivity() {
 
     private fun startAprsService(action: Int) {
         pendingAction = action
-        val permsSet = mutableSetOf<String>()
-        permsSet.addAll(AprsBackend.defaultBackendPermissions(prefs))
-        permsSet.addAll(LocationSource.getPermissions(prefs))
-        val perms = permsSet.toTypedArray()
-        if (perms.isEmpty()) {
-            // No permissions needed, start directly
-            when (action) {
-                START_SERVICE -> startService(AprsService.intent(this, AprsService.SERVICE))
-                START_SERVICE_ONCE -> startService(AprsService.intent(this, AprsService.SERVICE_ONCE))
-            }
-        } else {
-            // Check which permissions are not yet granted
-            val needed = perms.filter {
-                checkSelfPermission(it) != android.content.pm.PackageManager.PERMISSION_GRANTED
-            }
-            if (needed.isEmpty()) {
-                when (action) {
-                    START_SERVICE -> startService(AprsService.intent(this, AprsService.SERVICE))
-                    START_SERVICE_ONCE -> startService(AprsService.intent(this, AprsService.SERVICE_ONCE))
-                }
+        try {
+            val permsSet = mutableSetOf<String>()
+            permsSet.addAll(AprsBackend.defaultBackendPermissions(prefs))
+            permsSet.addAll(LocationSources.getPermissions(prefs))
+            val perms = permsSet.toTypedArray()
+            if (perms.isEmpty()) {
+                doStartService(action)
             } else {
-                permissionLauncher.launch(needed.toTypedArray())
+                val needed = perms.filter {
+                    checkSelfPermission(it) != android.content.pm.PackageManager.PERMISSION_GRANTED
+                }
+                if (needed.isEmpty()) {
+                    doStartService(action)
+                } else {
+                    permissionLauncher.launch(needed.toTypedArray())
+                }
             }
+        } catch (e: Exception) {
+            android.util.Log.e("APRSdroid.Log", "Failed to start service", e)
+            Toast.makeText(this, "Could not start service: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun doStartService(action: Int) {
+        when (action) {
+            START_SERVICE -> startService(AprsService.intent(this, AprsService.SERVICE))
+            START_SERVICE_ONCE -> startService(AprsService.intent(this, AprsService.SERVICE_ONCE))
         }
     }
 
     private fun stopAprsService() {
-        prefs.prefs.edit().putBoolean("service_running", false).commit()
-        stopService(AprsService.intent(this, AprsService.SERVICE))
+        try {
+            prefs.prefs.edit().putBoolean("service_running", false).commit()
+            stopService(AprsService.intent(this, AprsService.SERVICE))
+        } catch (e: Exception) {
+            android.util.Log.e("APRSdroid.Log", "Failed to stop service", e)
+            Toast.makeText(this, "Could not stop service: ${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun navigateTo(target: NavTarget) {
