@@ -316,3 +316,9 @@ If you find APRSdroid 9M2PJU Mod useful, consider supporting development:
 **Made with care by [9M2PJU](https://hamradio.my). 73.**
 
 </div>
+
+## Support
+
+If you find this project useful, please consider supporting it:
+
+[![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9m2pju%40hamradio.my&currency_code=MYR&item_name=9M2PJU-APRSdroid-Kotlin)
